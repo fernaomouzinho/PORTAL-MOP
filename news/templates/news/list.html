@@ -1,0 +1,140 @@
+{% extends "web_admin/layout.html" %}
+
+{% block content %}
+
+<div class="container-fluid py-3">
+
+    <!-- Header -->
+    <div class="card border-0 shadow-sm rounded-4 mb-3">
+        <div class="card-header bg-white text-white d-flex justify-content-between align-items-center">
+            <h5 class="mb-0 text-uppercase">{{ legend }}</h5>
+
+            {% if group == 'portal_media' or group == "portal_admin" %}
+            <a class="btn btn-light btn-sm"
+               href="{% url 'admin-news-add' %}">
+                <i class="fa fa-plus me-1"></i> Aumenta
+            </a>
+            {% endif %}
+
+        </div>
+    </div>
+
+    <!-- Table Card -->
+    <div class="card border-0 shadow-sm rounded-4">
+
+        <div class="card-body p-4">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle mb-0" id="example">
+
+                    <thead class="table-light">
+                        <tr>
+                            <th>#</th>
+                            <th>Titulu</th>
+                            <th>Data Publika</th>
+                            <th>Publika Husi</th>
+                            <th>Ativa</th>
+                            <th class="text-center">Aksi</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for obj in objects %}
+                        <tr>
+
+                            <td>{{ forloop.counter }}</td>
+
+                            <td>
+                                <a href="{% url 'admin-news-det' obj.hashed %}"
+                                   class="fw-semibold text-decoration-none">
+                                    {{ obj.title_tt }}
+                                </a>
+
+                                {% if obj.is_headline %}
+                                    <i class="fa fa-star text-warning ms-1"></i>
+                                {% endif %}
+
+                                {% if obj.is_main %}
+                                    <i class="fa fa-star-o text-secondary ms-1"></i>
+                                {% endif %}
+                            </td>
+
+                            <td>{{ obj.date|date:"d/m/Y" }}</td>
+
+                            <td class="text-muted">{{ obj.user }}</td>
+
+                            <td>
+                                {% if obj.is_active %}
+                                    <span class="badge bg-success">Sim</span>
+                                {% else %}
+                                    <span class="badge bg-danger">Lae</span>
+                                {% endif %}
+                            </td>
+
+                            <td class="text-center">
+
+                                <div class="d-flex justify-content-center gap-1 flex-wrap">
+
+                                    <!-- Edit -->
+                                    <a class="btn btn-sm btn-outline-primary"
+                                       href="{% url 'admin-news-edit' obj.hashed %}"
+                                       title="Altera">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+
+                                    <!-- Headline -->
+                                    <a class="btn btn-sm btn-outline-warning"
+                                       href="{% url 'admin-news-headline' obj.id %}"
+                                       title="Headline">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+
+                                    <!-- Main toggle -->
+                                    {% if obj.is_main %}
+                                        <a class="btn btn-sm btn-outline-secondary"
+                                           href="{% url 'admin-news-mainno' obj.id %}"
+                                           title="Remove Main">
+                                            <i class="fa fa-ban"></i>
+                                        </a>
+                                    {% else %}
+                                        <a class="btn btn-sm btn-outline-success"
+                                           href="{% url 'admin-news-mainyes' obj.id %}"
+                                           title="Set Main">
+                                            <i class="fa fa-star-o"></i>
+                                        </a>
+                                    {% endif %}
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+$(document).ready(function () {
+
+    $('#example').DataTable();
+
+});
+</script>
+
+{% endblock %}

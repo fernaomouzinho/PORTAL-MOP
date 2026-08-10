@@ -1,0 +1,55 @@
+{% extends "main/inner_page.html" %}
+{% load static %}
+{% block content %}
+<!-- ======= Breadcrumbs ======= -->
+<section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>{{ legend }}</h2>
+            <ol>
+                <li>{{ legend }}</li>
+            </ol>
+        </div>
+    </div>
+</section><!-- End Breadcrumbs -->
+
+<!-- ======= Portfolio Section ======= -->
+<section id="portfolio" class="portfolio section-bg">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>{{ legend }}</h2>
+      </div>
+
+      <div class="row portfolio-container">
+        {% for obj in objects %}
+        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+          <div class="portfolio-wrap">
+            <img src="{% static 'main/img/blank.jpg' %}" data-src="{{ obj.image.url }}" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <h4>{% if lang == "pt" %}{{ obj.desc_pt }}
+                {% elif lang == "en" %}{{ obj.desc_en }}
+                {% else %}{{ obj.desc_tt }}{% endif %}</h4>
+              <div class="portfolio-links">
+                {% if lang == "pt" %}
+                <a href="{{ obj.image.url }}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="{{ obj.desc_pt }}"><i class="bx bx-plus"></i></a>
+                {% elif lang == "en" %}
+                <a href="{{ obj.image.url }}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="{{ obj.desc_en }}"><i class="bx bx-plus"></i></a>
+                {% else %}
+                <a href="{{ obj.image.url }}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="{{ obj.desc_tt }}"><i class="bx bx-plus"></i></a>
+                {% endif %}
+                <a href="{% url 'gallery'  lang obj.hashed  %}" title="{{ lang_data.LBL_MORE }}"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+    </div>
+  </section><!-- End Portfolio Section -->
+
+{% endblock %}
+{% block scripts %}
+
+{% endblock %}

@@ -1,0 +1,619 @@
+{% load static %}
+<section id="topbar" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+      <div class="contact-info d-flex align-items-center">
+        <i class="bi bi-envelope-fill"></i><a href="mailto:{{contact.email}}">{{contact.email}}</a>
+        <i class="bi bi-phone-fill phone-icon"></i> {{contact.phone}} 
+      </div>
+      <div class="contact-info d-flex align-items-left">
+       <div class="left-topbar ">
+
+							{% if obj_lang %}
+							{% for obj in obj_lang %}
+							<span>
+								<!-- Menu Inisu -->
+								{% if request.path == '/' %}
+								<a href=" {% url 'home' lang=obj.abrev %} " class="text-decoration-none">
+								 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								{% elif request.path == '/tt/home/' %}
+								<a href="{% url 'home' lang=obj.abrev %} " class="text-decoration-none">
+               					<img class="ms-2" data-src="{{ obj.icon_lang.url }}" width="20" height="20"  class="img-fluid" alt="IMG">
+								</a>
+
+								{% elif request.path == '/pt/home/' %}
+								<a href="{% url 'home' lang=obj.abrev %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								{% elif request.path == '/en/home/' %}
+								<a href="{% url 'home' lang=obj.abrev %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								<!-- Menu MOP-->
+								<!-- Konaba -->
+								{% elif request.path == '/tt/about/' %}
+								<a href="{% url 'about' lang=obj.abrev %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/pt/about/' %}
+								<a href="{% url 'about' lang=obj.abrev %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/en/about/' %}
+								<a href="{% url 'about' lang=obj.abrev %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								<!-- Organograma -->
+								{% elif request.path == '/tt/orgchart/' %}
+								<a href="{% url 'orgchart' lang=obj.abrev %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/pt/orgchart/' %}
+								<a href="{% url 'orgchart' lang=obj.abrev %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/en/orgchart/' %}
+								<a href="{% url 'orgchart' lang=obj.abrev %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								<!-- Diresaun Jeral-->
+								{% elif request.path == '/tt/dgs/' %}
+								<a href="{% url 'dg-list' lang=obj.abrev %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/pt/dgs/' %}
+								<a href="{% url 'dg-list' lang=obj.abrev %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/en/dgs/' %}
+								<a href="{% url 'dg-list' lang=obj.abrev %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								<!-- Diresaun Jeral Detaill-->
+								{% elif request.path == path_dg_det_tt %}
+								<a href="{% url 'dg-det' lang=obj.abrev pk=pk %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_dg_det_pt %}
+								<a href="{% url 'dg-det' lang=obj.abrev pk=pk %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_dg_det_en %}
+								<a href="{% url 'dg-det' lang=obj.abrev pk=pk %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								
+								<!-- Divivizaun -->
+								{% elif request.path == '/tt/divs/' %}
+								<a href="{% url 'div-list' lang=obj.abrev  %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/pt/divs/' %}
+								<a href="{% url 'div-list' lang=obj.abrev %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/en/divs/' %}
+								<a href="{% url 'div-list' lang=obj.abrev  %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								<!-- Diviizaun Detaill -->
+								{% elif request.path == path_div_det_tt %}
+								<a href="{% url 'div-det' lang=obj.abrev pk=pk %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_div_det_pt %}
+								<a href="{% url 'div-det' lang=obj.abrev pk=pk %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_div_det_en %}
+								<a href="{% url 'div-det' lang=obj.abrev pk=pk %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								<!-- Instituisaun Tutela -->
+								{% elif request.path == '/tt/otdivs/' %}
+								<a href="{% url 'otdiv-list' lang=obj.abrev  %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/pt/otdivs/' %}
+								<a href="{% url 'otdiv-list' lang=obj.abrev %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/en/otdivs/' %}
+								<a href="{% url 'otdiv-list' lang=obj.abrev  %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								<!-- Instituisaun Tutela Detail -->
+								{% elif request.path == path_otdiv_det_tt %}
+								<a href="{% url 'otdiv-det' lang=obj.abrev pk=pk %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_otdiv_det_pt %}
+								<a href="{% url 'otdiv-det' lang=obj.abrev pk=pk %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_otdiv_det_en %}
+								<a href="{% url 'otdiv-det' lang=obj.abrev pk=pk %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+
+								<!-- Dokumentus -->
+								{% elif request.path == '/tt/doc/' %}
+								<a href="{% url 'doc-list' lang=obj.abrev  %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/pt/doc/' %}
+								<a href="{% url 'doc-list' lang=obj.abrev %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/en/doc/' %}
+								<a href="{% url 'doc-list' lang=obj.abrev  %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								<!-- Dokumentus Detail-->
+								{% elif request.path == path_doc_det_tt %}
+								<a href="{% url 'doc-det' lang=obj.abrev hashid=hashid %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_doc_det_pt %}
+								<a href="{% url 'doc-det' lang=obj.abrev hashid=hashid %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_doc_det_en %}
+								<a href="{% url 'doc-det' lang=obj.abrev hashid=hashid %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+
+								<!-- Relatoriu -->
+								{% elif request.path == '/tt/reports/' %}
+								<a href="{% url 'report-list' lang=obj.abrev  %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/pt/reports/' %}
+								<a href="{% url 'report-list' lang=obj.abrev %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/en/reports/' %}
+								<a href="{% url 'report-list' lang=obj.abrev  %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+
+								<!-- Relatoriu Detaillu-->
+								{% elif request.path == path_rep_det_tt %}
+								<a href="{% url 'report-det' lang=obj.abrev hashid=hashid %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_rep_det_pt %}
+								<a href="{% url 'report-det' lang=obj.abrev hashid=hashid %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_rep_det_en %}
+								<a href="{% url 'report-det' lang=obj.abrev hashid=hashid %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								<!-- Relatoriu Tuir Tinan -->
+								{% elif request.path == path_rep_yr_tt %}
+								<a href="{% url 'report-year-list' lang=obj.abrev yr=yr %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_rep_yr_pt %}
+								<a href="{% url 'report-year-list' lang=obj.abrev yr=yr %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_rep_yr_en %}
+								<a href="{% url 'report-year-list' lang=obj.abrev yr=yr %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+
+								<!-- Relatoriu Tuir Diresaun -->
+								{% elif request.path == path_rep_dg_tt %}
+								<a href="{% url 'report-dg-list' lang=obj.abrev dg=dg %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_rep_dg_pt %}
+								<a href="{% url 'report-dg-list' lang=obj.abrev dg=dg %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_rep_dg_en %}
+								<a href="{% url 'report-dg-list' lang=obj.abrev dg=dg %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+
+								<!-- Relatoriu Tuir Diresaun Kada Tinan -->
+								{% elif request.path == path_rep_dg_yr_tt %}
+								<a href="{% url 'report-year-dg-list' lang=obj.abrev yr=yr dg=dg %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_rep_dg_yr_pt %}
+								<a href="{% url 'report-year-dg-list' lang=obj.abrev yr=yr dg=dg %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_rep_dg_yr_en %}
+								<a href="{% url 'report-year-dg-list' lang=obj.abrev yr=yr dg=dg %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+
+							    <!-- Notisia Hotu -->
+								{% elif request.path == path_news_li_tt %}
+								<a href="{% url 'news-list' lang=obj.abrev %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_news_li_pt %}
+								<a href="{% url 'news-list' lang=obj.abrev %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_news_li_en %}
+								<a href="{% url 'news-list' lang=obj.abrev %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+
+								<!-- Notisia Tuir Tinan-->
+								{% elif request.path == path_news_yr_tt %}
+								<a href="{% url 'news-year' lang=obj.abrev year=year %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_news_yr_pt %}
+								<a href="{% url 'news-year' lang=obj.abrev year=year %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_news_yr_en %}
+								<a href="{% url 'news-year' lang=obj.abrev year=year %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								<!-- Notisia Tuir Tinan Fulan-->
+								{% elif request.path == path_news_yr_mt_tt %}
+								<a href="{% url 'news-month' lang=obj.abrev year=year month=month %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_news_yr_mt_pt %}
+								<a href="{% url 'news-month' lang=obj.abrev year=year month=month%} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_news_yr_mt_en %}
+								<a href="{% url 'news-month' lang=obj.abrev year=year month=month%} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								<!-- Notisia Detaillu Tuir Tinan Fulan -->
+								{% elif request.path == path_news_yr_mt_hs_ti_tt %}
+								{% comment %} <a href="{% url 'news-detail' lang=obj.abrev year=year month=objects.date|date:'m' hashid=objects.hashed  titleseo=objects.title_seo %} " class="text-decoration-none">{% endcomment %}
+								<a href="#" class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_news_yr_mt_hs_ti_pt %}
+								<a href="#" class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_news_yr_mt_hs_ti_en %}
+								<a href="#" class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								<!-- Notisia Kategoria -->
+								{% elif request.path == path_news_cat_tt %}
+								<a href="{% url 'news-cat-list' lang=obj.abrev cat=cat %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_news_cat_pt %}
+								<a href="{% url 'news-cat-list' lang=obj.abrev cat=cat %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_news_cat_en %}
+								<a href="{% url 'news-cat-list' lang=obj.abrev cat=cat %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								<!-- Notisia Kategoria Tuir Tinan -->
+								{% elif request.path == path_news_cat_yr_tt %}
+								<a href="{% url 'news-cat-year-list' lang=obj.abrev cat=cat year=year%} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_news_cat_yr_pt %}
+								<a href="{% url 'news-cat-year-list' lang=obj.abrev cat=cat year=year %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_news_cat_yr_en %}
+								<a href="{% url 'news-cat-year-list' lang=obj.abrev cat=cat year=year %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								<!-- Notisia Kategoria Tuir Tinan no Fulan-->
+								{% elif request.path == path_news_cat_yr_mt_tt %}
+								<a href="{% url 'news-cat-year-month-list' lang=obj.abrev cat=cat year=year month=month%} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_news_cat_yr_mt_pt %}
+								<a href="{% url 'news-cat-year-month-list' lang=obj.abrev cat=cat year=year  month=month%} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_news_cat_yr_mt_en %}
+								<a href="{% url 'news-cat-year-month-list' lang=obj.abrev cat=cat year=year  month=month%} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								<!-- Projetu Sumariu-->
+								{% elif request.path == '/tt/proj/sum/' %}
+								<a href="{% url 'proj-sum' lang=obj.abrev  %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/pt/proj/sum/' %}
+								<a href="{% url 'proj-sum' lang=obj.abrev %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/en/proj/sum/' %}
+								<a href="{% url 'proj-sum' lang=obj.abrev  %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								<!-- Projetu list -->
+								{% elif request.path == '/tt/proj/list/' %}
+								<a href="{% url 'proj-list' lang=obj.abrev  %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/pt/proj/list/' %}
+								<a href="{% url 'proj-list' lang=obj.abrev %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/en/proj/list/' %}
+								<a href="{% url 'proj-list' lang=obj.abrev  %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								<!-- Projetu historia -->
+								{% elif request.path == '/tt/proj/hist/' %}
+								<a href="{% url 'proj-hist' lang=obj.abrev  %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/pt/proj/hist/' %}
+								<a href="{% url 'proj-hist' lang=obj.abrev %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/en/proj/hist/' %}
+								<a href="{% url 'proj-hist' lang=obj.abrev  %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								<!-- Projetu Map View General -->
+								{% elif request.path == '/tt/proj/map/g/view/' %}
+								<a href="{% url 'proj-map-g-view' lang=obj.abrev  %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/pt/proj/map/g/view/' %}
+								<a href="{% url 'proj-map-g-view' lang=obj.abrev %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/en/proj/map/g/view/' %}
+								<a href="{% url 'proj-map-g-view' lang=obj.abrev  %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								<!-- Projetu Map View Status -->
+								{% elif request.path == '/tt/proj/map/s/view/' %}
+								<a href="{% url 'proj-map-s-view' lang=obj.abrev  %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/pt/proj/map/s/view/' %}
+								<a href="{% url 'proj-map-s-view' lang=obj.abrev %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/en/proj/map/s/view/' %}
+								<a href="{% url 'proj-map-s-view' lang=obj.abrev  %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								<!-- Projetu Map View Pending -->
+								{% elif request.path == '/tt/proj/map/p/view/' %}
+								<a href="{% url 'proj-map-p-view' lang=obj.abrev  %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/pt/proj/map/p/view/' %}
+								<a href="{% url 'proj-map-p-view' lang=obj.abrev %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/en/proj/map/p/view/' %}
+								<a href="{% url 'proj-map-p-view' lang=obj.abrev  %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								<!-- Imajen Album -->
+								{% elif request.path == '/tt/images/' %}
+								<a href="{% url 'album' lang=obj.abrev  %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/pt/images/' %}
+								<a href="{% url 'album' lang=obj.abrev %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/en/images/' %}
+								<a href="{% url 'album' lang=obj.abrev  %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+
+								<!-- Imajen Album Detail -->
+								{% elif request.path == path_gl_li_tt %}
+								<a href="{% url 'gallery' lang=obj.abrev  hashid=hashid %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_gl_li_pt %}
+								<a href="{% url 'gallery' lang=obj.abrev hashid=hashid%} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_gl_li_en %}
+								<a href="{% url 'gallery' lang=obj.abrev hashid=hashid %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								<!-- Imajen Album Image Detail -->
+								{% elif request.path == path_gl_det_tt %}
+								<a href="{% url 'gallery-det' lang=obj.abrev  hashid=hashid %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_gl_det_pt %}
+								<a href="{% url 'gallery-det' lang=obj.abrev hashid=hashid%} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_gl_det_en %}
+								<a href="{% url 'gallery-det' lang=obj.abrev hashid=hashid %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								
+
+								<!-- Video -->
+								{% elif request.path == '/tt/video/' %}
+								<a href="{% url 'video' lang=obj.abrev  %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/pt/video/' %}
+								<a href="{% url 'video' lang=obj.abrev %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/en/video/' %}
+								<a href="{% url 'video' lang=obj.abrev  %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								<!-- Vaga -->
+								{% elif request.path == '/tt/vaga/list/' %}
+								<a href="{% url 'vaga-list' lang=obj.abrev  %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/pt/vaga/list/' %}
+								<a href="{% url 'vaga-list' lang=obj.abrev %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/en/vaga/list/' %}
+								<a href="{% url 'vaga-list' lang=obj.abrev  %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								<!-- Vaga Detail -->
+								{% elif request.path == path_vg_det_tt %}
+								<a href="{% url 'vaga-det' lang=obj.abrev hashid=hashid %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_vg_det_pt %}
+								<a href="{% url 'vaga-det' lang=obj.abrev hashid=hashid %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_vg_det_en %}
+								<a href="{% url 'vaga-det' lang=obj.abrev hashid=hashid %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								<!-- Tender -->
+								{% elif request.path == '/tt/tender/list/' %}
+								<a href="{% url 'tender-list' lang=obj.abrev  %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/pt/tender/list/' %}
+								<a href="{% url 'tender-list' lang=obj.abrev %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/en/tender/list/' %}
+								<a href="{% url 'tender-list' lang=obj.abrev  %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								<!-- Tender Detail -->
+								{% elif request.path == path_td_det_tt %}
+								<a href="{% url 'tender-det' lang=obj.abrev hashid=hashid %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_td_det_pt %}
+								<a href="{% url 'tender-det' lang=obj.abrev hashid=hashid %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_td_det_en %}
+								<a href="{% url 'tender-det' lang=obj.abrev hashid=hashid %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								<!-- Anuncio -->
+								{% elif request.path == '/tt/ann/list/' %}
+								<a href="{% url 'ann-list' lang=obj.abrev  %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/pt/ann/list/' %}
+								<a href="{% url 'ann-list' lang=obj.abrev %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/en/ann/list/' %}
+								<a href="{% url 'ann-list' lang=obj.abrev  %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								<!-- Anuncio Detail -->
+								{% elif request.path == path_ann_det_tt %}
+								<a href="{% url 'ann-det' lang=obj.abrev hashid=hashid %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_ann_det_pt %}
+								<a href="{% url 'ann-det' lang=obj.abrev hashid=hashid %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_ann_det_en %}
+								<a href="{% url 'ann-det' lang=obj.abrev hashid=hashid %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+
+								<!--Team MOP -->
+								{% elif request.path == path_tm_det_tt %}
+								<a href="# " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_tm_det_pt %}
+								<a href="# " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == path_tm_det_en %}
+								<a href="#" class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+							
+
+								<!-- Menu Kontaktu -->
+								{% elif request.path == '/tt/contact/' %}
+								<a href="{% url 'contact' lang=obj.abrev %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/en/contact/'%}
+								<a href="{% url 'contact' lang=obj.abrev %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% elif request.path == '/pt/contact/' %}
+								<a href="{% url 'contact' lang=obj.abrev %} " class="text-decoration-none">
+									 <img class="ms-2 img-fluid" data-src="{{ obj.icon_lang.url}}" width="20" height="20"  alt="IMG">
+								</a>
+								{% endif %}
+
+							</span>
+							{% endfor %}
+							{% else %}
+							<p>Hatama Icon Imajen</p>
+							{% endif %}
+						</div>
+        
+      </div>
+    </div>
+  </section>

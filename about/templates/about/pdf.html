@@ -1,0 +1,59 @@
+{% extends "web_admin/layout.html" %}
+
+{% block content %}
+
+<div class="container-fluid py-3">
+
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb bg-light px-3 py-2 rounded-3 shadow-sm">
+            <li class="breadcrumb-item">
+                <a href="{% url 'admin-struc-list' %}" class="text-decoration-none">
+                    LISTA JESTOR
+                </a>
+            </li>
+            <li class="breadcrumb-item active text-uppercase">
+                {{ legend }}
+            </li>
+        </ol>
+    </nav>
+
+    <!-- Action Bar -->
+    <div class="mb-3">
+        <a class="btn btn-primary btn-sm"
+           href="{% url 'admin-orgchart-edit' %}">
+            <i class="fa fa-edit me-1"></i> Altera
+        </a>
+    </div>
+
+    <!-- PDF Viewer Card -->
+    <div class="card border-0 shadow-sm rounded-4">
+
+        <div class="card-body p-0">
+
+            {% if objects.org_chart %}
+
+                <div class="ratio ratio-16x9">
+                    <iframe
+                        src="{{ objects.org_chart.url }}"
+                        style="border:0;"
+                        loading="lazy">
+                    </iframe>
+                </div>
+
+            {% else %}
+
+                <div class="p-5 text-center text-muted">
+                    <i class="fa fa-file-pdf-o fa-2x mb-2"></i>
+                    <p class="mb-0">Pajina la iha!</p>
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

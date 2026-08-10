@@ -1,0 +1,57 @@
+{% load static %}
+<header id="header" class="d-flex align-items-center">
+    <div class="container d-flex align-items-center">
+        
+        <!-- <h1 class="logo me-auto"><a href="index.html">Green</a></h1> -->
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <a href="{% url 'home' l1 %}" class="logo me-auto">
+        <img data-src="{% static 'main/img/logo-mop.png' %}" alt="" class="img-fluid"></a>
+       
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a class="nav-link scrollto {{home_active}}" href="{% url 'home' l1 %}">Inisiu</a></li>
+                <li class="dropdown"><a href="#" class="{{about_active}}"><span>Kona-ba</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="{% url 'about' l1 %}">Perfil MOP</a></li>
+                        <li><a href="{% url 'orgchart' l1 %}">Organograma</a></li>
+                        <li><a href="{% url 'dg-list' l1 %}">Diresaun Jeral</a></li>
+                        <li><a href="{% url 'div-list' l1 %}">Diresaun Nacional</a></li>
+                        <li><a href="{% url 'otdiv-list' l1 %}">Instituisaun Tutela</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown"><a href="#" class="{{doc_active}}"><span>Dokumentus</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="{% url 'doc-list' l1 %}">Lei</a></li>
+                        <li><a href="{% url 'report-list' l1 %}">Relatoriu</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown"><a href="#" class="{{doc_active}}"><span>Notisia</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                    {% for obj in newcat %}
+                        <li><a href="{% url 'news-cat-list' l1  obj.slug_name_en %}">{{obj.name_tt}}</a></li>
+                    {% endfor %}
+                    </ul>
+                </li>
+
+                <li><a class="nav-link scrollto {{proj_active}}" href="{% url 'proj-sum' l1 %}">Projetu</a></li>
+                <li class="dropdown"><a href="#" class="{{media_active}}"><span>Multimedia</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="{% url 'album' l1 %}">Imajen</a></li>
+                        <li><a href="{% url 'video' l1 %}">Video</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown"><a href="#" class="{{other_active}}"><span>Anunsiu Seluk</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="{% url 'vaga-list' l1 %}">Anunsiu Vaga Servisu</a></li>
+                        <li><a href="{% url 'tender-list' l1 %}">Anunsiu Tenderizasaun</a></li>
+                        <li><a href="{% url 'ann-list' l1 %}">Publikasaun</a></li>
+                    </ul>
+                </li>
+                <li><a class="nav-link scrollto {{contact_active}}" href="{% url 'contact' l1 %}">Kontaktu</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+        
+    </div>
+</header>

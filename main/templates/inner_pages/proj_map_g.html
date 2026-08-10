@@ -1,0 +1,95 @@
+{% extends "main/inner_page.html" %}
+{% load static %}
+{% block content %}
+<!-- ======= Breadcrumbs ======= -->
+<section id="breadcrumbs" class="breadcrumbs">
+	<div class="container">
+		<div class="d-flex justify-content-between align-items-center">
+			<h2>{{ legend }}</h2>
+			<ol>
+                <li><a href="{% url 'proj-sum' lang %}">{{ lang_data.LINK_PSUM }}</a></li>
+				<li>{{ legend }}</li>
+			</ol>
+		</div>
+	</div>
+</section><!-- End Breadcrumbs -->
+
+<!-- ======= Featured Services Section ======= -->
+<section id="featured-services" class="featured-services section-bg">
+    <div class="container">
+        <div class="section-title"><h2>{{ legend }}</h2></div>
+        <div class="row no-gutters">
+            <div class="col-lg-12 col-md-6">
+                <div id="map" style="width: 100%; height: 600px;"></div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div>
+</section><!-- End Featured Services Section -->
+
+{% endblock %}
+{% block scripts %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+<link rel="stylesheet" href="{% static 'main/leaflet/leaflet.css' %}" />
+<link rel="stylesheet" href="{% static 'main/leaflet/leaflet-panel-layers.css' %}" />
+<link rel="stylesheet" href="{% static 'main/leaflet/icons.css' %}" />
+<link rel="stylesheet" href="{% static 'main/leaflet/style.css' %}" />
+
+<script src="{% static 'main/leaflet/leaflet.js' %}"></script>
+<script src="{% static 'main/leaflet/leaflet-panel-layers.js' %}"></script>
+<script src="{% static 'main/js/jquery-2.1.1.min.js' %}"></script>
+
+<link href="{% static 'main/leaflet/leaflet.fullscreen.css' %}" rel='stylesheet' />
+<script src="{% static 'main/leaflet/Leaflet.fullscreen.min.js' %}"></script>
+
+<script type="text/javascript" src="{{ objects.file.url }}"></script>
+<script>
+	const map = L.map('map', {
+		center: [-8.573701,125.47718],
+		zoom: 10,
+		maxZoom: 18,
+		minZoom: 8,
+		fullscreenControl: {
+			pseudoFullscreen: false
+		}
+	});
+	
+	const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 19,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	}).addTo(map);
+
+	var greenIcon = new L.Icon({
+		iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+		shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+		iconSize: [25, 41],
+		iconAnchor: [12, 41],
+		popupAnchor: [1, -34],
+		shadowSize: [41, 41]
+	});
+
+	function onEachFeature(feature, layer) {
+		var popupContent = "<p>";
+			if (feature.properties && feature.properties.popupContent) {
+				popupContent += "Projetu: "+feature.properties.popupContent+"<br/>"
+				+"Kategoria: "+feature.properties.popupCat+"<br/>"
+				+"Setor: "+feature.properties.popupSec+"<br/>"
+				+"Status: "+feature.properties.popupStatus+"<br/>"
+				+"Tinan: "+feature.properties.popupYear+"<br/>"
+				+"Dono: "+feature.properties.popupOwner+"</p>";
+			}
+		layer.bindPopup(popupContent);
+	}
+	
+	const marker = L.geoJSON([all], {
+
+	style(feature) {
+		return feature.properties && feature.properties.style;
+	}, onEachFeature,
+
+	pointToLayer(feature, latlng) {
+		return L.marker(latlng, {icon: greenIcon});
+	}
+	}).addTo(map);
+</script>
+{% endblock %}

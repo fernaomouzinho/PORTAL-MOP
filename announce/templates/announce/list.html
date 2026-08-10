@@ -1,0 +1,61 @@
+{% extends "web_admin/layout.html" %}
+{% load static %}
+{% block content %}
+	<div class="row">
+        <div class="col-sm-12">
+            <div class="card border-info shadow-lg pt-1 rounded">
+                <div class="card-header">{{ legend|upper }}</div>
+                <div class="card-body">
+                    <a class="btn btn-sm btn-info mb-1" href="{% url 'admin-ann-add' %}">Aumenta <i class="fa fa-plus"></i></a>
+                    <table class="table table-sm table-striped" id="example">
+                        <thead>
+                            <tr>
+                                <th>Nu.</th>
+                                <th>Titulu</th>
+                                <th>Data Publika</th>
+                                <th>Publika Husi</th>
+                                <th>Ativa</th>
+                                <th>#</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for obj in objects %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td><a href="{% url 'admin-ann-det' obj.hashed %}">{{ obj.title }}</a></td>
+                                <td>{{ obj.datetime|date:"d/m/Y" }}</td>
+                                <td>{{ obj.user|capfirst }}</td>
+                                <td>{% if obj.is_active %}Sim{% else %}Lae{% endif %}</td>
+                                <td>
+                                    <a class="btn btn-sm btn-info" href="{% url 'admin-ann-edit' obj.hashed %}" title="Altera"><i class="fa fa-edit"></i></a>
+                                    <a class="btn btn-sm btn-danger" href="{% url 'admin-ann-rem' obj.id %}" title="Hapaga"><i class="fa fa-trash"></i></a>
+				                {% if obj.is_active == True %}
+                                <a class="btn btn-sm btn-warning" href="{% url 'admin-ann-dis' obj.id %}" title="Desativa"><i class="fa fa-ban"></i></a>
+                                {% else %}
+                                <a class="btn btn-sm btn-warning" href="{% url 'admin-ann-ena' obj.id %}" title="Ativa"><i class="fa fa-check"></i></a>
+                                {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div> <!--end card-body-->
+            </div> <!--end card-->
+        </div> <!--end col-->
+    </div> <!--end row-->
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#example').DataTable({
+      pageLength: 5,
+    });
+  });
+</script>
+
+{% endblock %}
+
+
+
+
+

@@ -1,0 +1,27 @@
+{% extends "web_admin/layout.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+	<ol class="breadcrumb mb-2 mt-1">
+		<li class="breadcrumb-item"><a href="{% url 'admin-struc-list' %}">LISTA ESTRUTURA</a></li>
+		<li class="breadcrumb-item active" aria-current="page">{{ legend|upper }}</li>
+	</ol>
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="card shadow-lg pt-1 rounded">
+				<div class="card-header">{{ legend|upper }}</div>
+				<div class="card-body">
+					{% crispy form %}
+				</div> <!--end card-body-->
+			</div> <!--end card-->
+		</div> <!--end col-->
+	</div> <!--end row-->
+{% endblock %}
+{% block scripts %}
+	<!-- display image after browse -->
+	<script type="text/javascript">
+		$("input").change(function(e) {
+			var read = document.getElementById('output');
+			read.src = URL.createObjectURL(event.target.files[0]);
+		});
+	</script>
+{% endblock %}

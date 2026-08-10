@@ -1,0 +1,44 @@
+{% extends "web_admin/layout.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="box">
+	<div class="row">
+		<div class="col-xl-6 col-md-6">
+			<div class="card shadow-lg">
+				<div class="card-header">Konta</div>
+				<div class="card-body">
+					<table class="table table-sm">
+						<tr>
+							<td>Naran</td>
+							<td>: {{ user.first_name }}</td>
+						</tr>
+						<tr>
+							<td>Username</td>
+							<td>: {{ user.username }}</td>
+						</tr>
+						<tr>
+							<td>Email</td>
+							<td>: {{ user.email }}</td>
+						</tr>
+					</table>
+				</div>
+				<div class="card-footer">					
+					<div class="small">
+						<a class="btn btn-sm btn-info" href="{% url 'user-change-password' %}">Troka password!</a>
+					</div>
+				</div>
+			</div>
+		</div> <!--end card-md-6-->
+		<div class="col-xl-6 col-md-6">
+			<div class="card shadow-lg">
+				<div class="card-header">Altera</div>
+				<div class="card-body">
+					<fieldset class="form-group">
+						{% crispy u_form %}
+					</fieldset>
+				</div>
+			</div>
+		</div> <!--end card-md-6-->
+	</div> <!--end row-->
+</div>
+{% endblock content %}

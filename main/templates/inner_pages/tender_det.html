@@ -1,0 +1,51 @@
+{% extends "main/inner_page.html" %}
+{% load static %}
+{% block content %}
+<!-- ======= Breadcrumbs ======= -->
+<section id="breadcrumbs" class="breadcrumbs">
+	<div class="container">
+		<div class="d-flex justify-content-between align-items-center">
+			<h2>{{ legend }}</h2>
+			<ol>
+				{% if lang == "pt" %}
+				<li><a href="{% url 'tender-list' lang %}">Aprovisionamento</a></li>
+				{% elif lang == "en" %}
+				<li><a href="{% url 'tender-list' lang %}">Procurements</a></li>
+				{% else %}
+				<li><a href="{% url 'tender-list' lang %}">Aprovisionamentu</a></li>
+				{% endif %}
+				<li>{{ legend }}</li>
+			</ol>
+		</div>
+	</div>
+</section><!-- End Breadcrumbs -->
+
+<section id="about" class="about">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 order-1 order-lg-2">
+				<div class="container-embed">
+					<div class="box" style="background: white;color:black;">
+						<embed src="{{ objects.file.url }}#toolbar=1" type="application/pdf" height="900px" width="100%">
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
+				<h5>{{ objects.title }}</h5>
+				<ol class="breadcrumb justify-content-begin mt-2 mb-3">
+					<li class="breadcrumb-item small"><i class="bi bi-calendar text-success me-2"></i>{% if lang == "en" %}{{ objects.datetime|date:"M d, Y H:i" }}{% else %}{{ objects.datetime|date:"d M Y" }}{% endif %}</li>
+				</ol>
+				<p>{{ objects.desc|safe }}</p>
+                <hr/>
+                <img src="{% static 'main/img/blank.jpg' %}" data-src="{{ objects.image.url }}" width="90%">
+                <hr/>
+                <div id="fb-root"></div>
+				<div class="fb-share-button" data-href="https://mop.gov.tl{{ request.get_full_path }}" data-layout="button_count"></div>
+			</div>
+		</div>
+	</div>
+</section>
+<hr/>
+{% endblock %}
+{% block scripts %}
+{% endblock %}

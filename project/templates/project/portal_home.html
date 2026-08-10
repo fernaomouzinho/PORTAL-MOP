@@ -1,0 +1,155 @@
+{% extends "web_admin/layout.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<ol class="breadcrumb mb-2 mt-1">
+    <li class="breadcrumb-item"><a href="{% url 'admin-proj-dash' %}">PAINEL</a></li>
+    <li class="breadcrumb-item active">{{ legend|upper }}</li>
+</ol>
+
+<div class="row g-3">
+
+    <!-- SIGP CARD -->
+    <div class="col-12">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-white fw-bold">
+                SIGP DATA ({{ read.year }})
+            </div>
+
+            <div class="card-body">
+
+                <div class="row text-center g-2">
+
+                    <div class="col-6 col-md-2">
+                        <div class="p-3 bg-light rounded">
+                            <div class="fw-bold">{{ read.obj.0 }}</div>
+                            <small>Foun</small>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-2">
+                        <div class="p-3 bg-light rounded">
+                            <div class="fw-bold">{{ read.obj.1 }}</div>
+                            <small>Reapro</small>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-2">
+                        <div class="p-3 bg-light rounded">
+                            <div class="fw-bold">{{ read.obj.2 }}</div>
+                            <small>Kompletu</small>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-2">
+                        <div class="p-3 bg-light rounded">
+                            <div class="fw-bold">{{ read.obj.3 }}</div>
+                            <small>Lao Hela</small>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-2">
+                        <div class="p-3 bg-light rounded">
+                            <div class="fw-bold">{{ read.obj.4 }}</div>
+                            <small>Seidauk Hahu</small>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- PORTAL CARD -->
+    <div class="col-12">
+        <div class="card shadow-sm border-0">
+
+            <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                <span class="fw-bold">PORTAL DATA ({{ obj.year }})</span>
+
+                <div class="d-flex gap-2">
+
+                    <a class="btn btn-sm btn-info"
+                       href="{% url 'admin-portal-home-sync' %}">
+                        <i class="fa fa-refresh"></i> Atualiza
+                    </a>
+
+                    {% if obj.is_active %}
+                        <a class="btn btn-sm btn-warning"
+                           href="{% url 'admin-portal-home-dis' %}">
+                            <i class="fa fa-ban"></i> Desativa
+                        </a>
+                    {% else %}
+                        <a class="btn btn-sm btn-success"
+                           href="{% url 'admin-portal-home-ena' %}">
+                            <i class="fa fa-check"></i> Ativa
+                        </a>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="row text-center g-2">
+
+                    <div class="col-6 col-md-2">
+                        <div class="p-3 bg-light rounded">
+                            <div class="fw-bold">{{ obj.new }}</div>
+                            <small>Foun</small>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-2">
+                        <div class="p-3 bg-light rounded">
+                            <div class="fw-bold">{{ obj.rollover }}</div>
+                            <small>Reapro</small>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-2">
+                        <div class="p-3 bg-light rounded">
+                            <div class="fw-bold">{{ obj.completed }}</div>
+                            <small>Kompletu</small>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-2">
+                        <div class="p-3 bg-light rounded">
+                            <div class="fw-bold">{{ obj.ongoing }}</div>
+                            <small>Lao Hela</small>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-2">
+                        <div class="p-3 bg-light rounded">
+                            <div class="fw-bold">{{ obj.notstarted }}</div>
+                            <small>Seidauk</small>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-2">
+                        <div class="p-3 bg-success text-white rounded">
+                            <div class="fw-bold">
+                                {% if obj.is_active %}Ativu{% else %}Desativa{% endif %}
+                            </div>
+                            <small>Status</small>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

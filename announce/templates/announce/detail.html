@@ -1,0 +1,45 @@
+{% extends "web_admin/layout.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<ol class="breadcrumb mb-2 mt-1">
+	<li class="breadcrumb-item"><a href="{% url 'admin-ann-list' %}">ANUNCIU</a></li>
+	<li class="breadcrumb-item active" aria-current="page">{{ legend|upper }}</li>
+</ol>
+<div class="row">
+	<div class="col-sm-12">
+		<div class="card border-info shadow-lg pt-1 rounded">
+			<div class="card-header">{{ legend|upper }}</div>
+			<div class="card-body">
+				<table class="table table-sm table-striped">
+					<tr><th>Data Upload</th><th>Husi</th></tr>
+					<tr><td>{{ objects.datetime|date:"d/m/Y" }}</td><td>{{ objects.user }}</td></tr>
+				</table>
+				
+				{% if objects.user == request.user %}
+				<a class="btn btn-sm btn-info" href="{% url 'admin-ann-edit' objects.hashed %}" title="Altera">Altera <i class="fa fa-edit"></i></a>
+				<a class="btn btn-sm btn-danger" href="{% url 'admin-ann-rem' objects.id %}" title="Hapaga"><i class="fa fa-trash"></i></a>
+				{% else %}
+				<a class="btn btn-sm btn-info disabled" href="#">Altera <i class="fa fa-edit"></i></a>
+				{% endif %}
+				<a class="btn btn-sm btn-secondary" href="{% url 'admin-ann-pdf' objects.hashed %}" target="_blank">Hare PDF <i class="fa fa-file-text-o"></i></a>
+				<hr/>
+				<div class="row">
+					<div class="col-sm-8 border-info">
+						<div class="card border-info">
+							<div class="card-header">{{ objects.title }}</div>
+							<div class="card-body">
+								<p>{{ objects.desc|safe }}</p>
+							</div>
+						</div><!-- end card-->
+					</div><!-- end col-->
+					<div class="col-sm-4 border-info">
+						{% if objects.image %}<img src="{{ objects.image.url }}" width="100%">{% endif %}
+					</div><!-- end row-->
+				</div><!-- end row-->
+			</div> <!--end card-body-->
+		</div> <!--end card-->
+	</div> <!--end col-->
+</div> <!--end row-->
+{% endblock %}
+{% block scripts %}
+{% endblock %}

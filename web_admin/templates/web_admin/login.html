@@ -1,0 +1,71 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>WEB PORTAL-LOGIN</title>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="{% static 'web_admin/css/bootstrap.min.css' %}">
+	<link rel="shortcut icon" href="{% static 'main/img/logo.png' %}">
+	<link rel="stylesheet" href="{% static 'main/font-awesome/css/font-awesome.min.css' %}">
+	
+	<link rel="stylesheet" href="{% static 'web_admin/css/main.css' %}">
+</head>
+<body style="margin-top: 2rem;">
+	<header class="site-header">
+		<nav class="navbar navbar-expand-md navbar-dark bg-navbar fixed-top">
+		</nav>
+	</header>
+	<main role="main" class="container">
+		<div class="row">
+			<div class="col-md-7">
+				<center>
+					<h1>- WEB PORTAL MOP -</h1><hr/>
+					<img src="{% static 'main/img/logo.png' %}" width="65%">
+				</center>
+				<hr/>
+			</div>
+			<div class="col-md-5">
+				<div class="row justify-content-center">
+					<div class="col-sm-12">
+						<div class="card border-info shadow-lg">
+							<div class="card-header bg-card">
+								Prenche Username no Password
+							</div>
+							<div class="card-body">
+								<form method="POST">
+									{% csrf_token %}
+									{{ form|crispy }}
+									<div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+										<button class="btn btn-sm btn-one" type="submit">Tama <i class="fa fa-sign-in"></i></button>
+									</div>
+								</form>
+							</div> <!--end card-body-->
+						</div> <!--end card-->
+					</div> <!--end col-->
+				</div> <!--end row-->
+			</div>
+		</div>
+	</main>
+	<hr/>
+	
+	<!-- Footer -->
+	<footer class="page-footer font-small bg-footer">
+		<!-- Copyright -->
+		<div class="footer-copyright text-center py-3">
+			Copyright &copy; 2023 MOP<br/>
+			All right reserved
+		</div>
+		<!-- Copyright -->
+	</footer>
+	<!-- Footer -->
+	
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="{% static 'web_admin/js/jquery.min.js' %}"></script>
+	<script src="{% static 'web_admin/js/bootstrap.min.js' %}"></script>
+</body>
+</html>

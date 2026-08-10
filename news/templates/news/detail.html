@@ -1,0 +1,201 @@
+{% extends "web_admin/layout.html" %}
+{% load humanize %}
+
+{% block content %}
+
+<div class="container-fluid py-3">
+
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb bg-light px-3 py-2 rounded-3 shadow-sm">
+            <li class="breadcrumb-item">
+                <a href="{% url 'admin-news-list' %}" class="text-decoration-none">
+                    NUTISIA
+                </a>
+            </li>
+            <li class="breadcrumb-item active text-uppercase" aria-current="page">
+                {{ legend }}
+            </li>
+        </ol>
+    </nav>
+
+    <!-- Main Card -->
+    <div class="card border-0 shadow-sm rounded-4">
+
+        <!-- Header -->
+        <div class="card-header bg-white text-white d-flex flex-wrap justify-content-between align-items-center gap-2">
+            <h5 class="mb-0 text-uppercase">{{ legend }}</h5>
+
+            <div class="d-flex flex-wrap gap-2">
+
+                {% if news.user == request.user %}
+                <a class="btn btn-sm btn-light"
+                   href="{% url 'admin-news-edit' news.hashed %}">
+                    <i class="fa fa-edit me-1"></i> Altera
+                </a>
+
+                <a class="btn btn-sm btn-danger"
+                   href="{% url 'admin-news-rem' news.id %}">
+                    <i class="fa fa-trash"></i>
+                </a>
+                {% endif %}
+
+                {% if news.is_active %}
+                <a class="btn btn-sm btn-warning"
+                   href="{% url 'admin-news-dis' news.hashed %}"
+                   title="Desativa">
+                    <i class="fa fa-ban"></i>
+                </a>
+                {% else %}
+                <a class="btn btn-sm btn-success"
+                   href="{% url 'admin-news-ena' news.hashed %}"
+                   title="Ativa">
+                    <i class="fa fa-check"></i>
+                </a>
+                {% endif %}
+
+            </div>
+        </div>
+
+        <!-- Body -->
+        <div class="card-body">
+
+            <div class="row g-4">
+
+                <!-- LEFT CONTENT -->
+                <div class="col-lg-8">
+
+                    <!-- Info Table -->
+                    <div class="table-responsive">
+                        <table class="table table-bordered align-middle">
+
+                            <tr class="table-light">
+                                <th colspan="3">Titulu</th>
+                                <th>Status</th>
+                            </tr>
+
+                            <tr>
+                                <td colspan="3">{{ news.title_tt }}</td>
+                                <td>
+                                    {% if news.is_active %}
+                                        <span class="badge bg-success">Ativu</span>
+                                    {% else %}
+                                        <span class="badge bg-danger">Lae</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+
+                            <tr class="table-light">
+                                <th>Lingua</th>
+                                <th>Kategoria</th>
+                                <th>Autor</th>
+                                <th>Data</th>
+                            </tr>
+
+                            <tr>
+                                <td>{{ news.language|upper }}</td>
+                                <td>{{ news.cat }}</td>
+                                <td>{{ news.user|upper }}</td>
+                                <td>{{ news.date|date:"d/m/Y" }}</td>
+                            </tr>
+
+                        </table>
+                    </div>
+
+                    <!-- Headline -->
+                    <div class="card border-0 bg-light rounded-4 mb-3">
+                        <div class="card-body">
+                            <h6 class="fw-bold mb-3">Sinopsiu</h6>
+                            <div>{{ news.headline_tt|safe }}</div>
+                        </div>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="card border-0 bg-light rounded-4">
+                        <div class="card-body">
+                            <h6 class="fw-bold mb-3">Konteudu</h6>
+                            <div>{{ news.content_tt|safe }}</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- RIGHT SIDEBAR -->
+                <div class="col-lg-4">
+
+                    <div class="card border-0 bg-light rounded-4">
+
+                        <div class="card-body">
+
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h6 class="mb-0 fw-bold">
+                                    Imajen
+                                </h6>
+
+                                {% if news.user == request.user %}
+                                <a class="btn btn-sm btn-primary"
+                                   href="{% url 'admin-newsimg-add' news.hashed %}">
+                                    <i class="fa fa-plus me-1"></i> Add
+                                </a>
+                                {% endif %}
+                            </div>
+
+                            {% for i in images %}
+                            <div class="mb-3">
+
+                               {% if i.image %}
+                                <a href="{{ i.image.url }}" target="_blank">
+
+                                    {% if i.image_thumbnail and i.image_thumbnail.name %}
+                                        <img src="{{ i.image_thumbnail.url }}"
+                                            class="img-fluid rounded-3 shadow-sm w-100"
+                                            alt="News Image">
+                                    {% else %}
+                                        <img src="{{ i.image.url }}"
+                                            class="img-fluid rounded-3 shadow-sm w-100"
+                                            alt="News Image">
+                                    {% endif %}
+
+                                </a>
+                                {% else %}
+
+                                <div class="bg-light border rounded-3 text-center py-5 text-muted">
+                                    <i class="fa fa-picture-o fa-2x mb-2"></i><br>
+                                    No image available
+                                </div>
+
+                                {% endif %}
+                                {% if news.user == request.user %}
+                                <div class="mt-2 text-end">
+                                    <a href="{% url 'admin-newsimg-edit' news.hashed i.id %}"
+                                       class="btn btn-sm btn-outline-primary">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                </div>
+                                {% endif %}
+
+                            </div>
+                            {% empty %}
+                            <div class="text-muted text-center py-4">
+                                No images uploaded
+                            </div>
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

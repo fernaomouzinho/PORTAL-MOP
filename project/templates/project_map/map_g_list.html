@@ -1,0 +1,163 @@
+{% extends "web_admin/layout.html" %}
+
+{% block content %}
+
+<ol class="breadcrumb mb-2 mt-1">
+    <li class="breadcrumb-item">
+        <a href="{% url 'admin-proj-dash' %}">PAINEL</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+        {{ legend|upper }}
+    </li>
+</ol>
+
+<div class="row">
+    <div class="col-sm-12">
+
+        <div class="card border-info shadow-lg pt-1 rounded">
+
+            <div class="card-header">
+                {{ legend|upper }}
+            </div>
+
+            <div class="card-body">
+
+                <a class="btn btn-sm btn-info mb-3" href="{% url 'admin-map-g-add' %}">
+                    Aumenta <i class="fa fa-plus"></i>
+                </a>
+
+                <!-- NEWS STYLE TABLE WRAPPER -->
+                <div class="table-responsive news-table">
+
+                    <table class="table table-sm table-hover align-middle" id="example">
+
+                        <thead class="table-light">
+                            <tr>
+                                <th>Nu.</th>
+                                <th>Deskrisaun</th>
+                                <th>Upload Husi</th>
+                                <th>Data</th>
+                                <th>Status</th>
+                                <th>#</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for obj in objects %}
+                            <tr class="news-row">
+
+                                <td class="fw-bold">{{ forloop.counter }}</td>
+
+                                <td>
+                                    <div class="fw-semibold">
+                                        {{ obj.subject }}
+                                    </div>
+                                </td>
+
+                                <td>{{ obj.user|capfirst }}</td>
+
+                                <td>{{ obj.datetime|date:"d/m/Y" }}</td>
+
+                                <td>
+                                    {% if obj.is_active %}
+                                        <span class="badge bg-success">Ativu</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">Lae</span>
+                                    {% endif %}
+                                </td>
+
+                                <td class="d-flex gap-1 flex-wrap">
+
+                                    <a class="btn btn-sm btn-secondary"
+                                       href="{% url 'admin-map-g-view' obj.id %}">
+                                        <i class="fa fa-map"></i>
+                                    </a>
+
+                                    <a class="btn btn-sm btn-info"
+                                       href="{% url 'admin-map-g-edit' obj.id %}">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+
+                                    <a class="btn btn-sm btn-primary"
+                                       href="{% url 'admin-map-g-ena' obj.id %}">
+                                        <i class="fa fa-check"></i>
+                                    </a>
+
+                                    <a class="btn btn-sm btn-danger"
+                                       href="{% url 'admin-map-g-rem' obj.id %}">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function () {
+    $('#example').DataTable({
+        pageLength: 5,
+        responsive: true
+    });
+});
+</script>
+
+<style>
+/* 🌟 NEWS STYLE MOBILE BEHAVIOR */
+@media (max-width: 768px) {
+
+    table#example thead {
+        display: none;
+    }
+
+    table#example, 
+    table#example tbody, 
+    table#example tr, 
+    table#example td {
+        display: block;
+        width: 100%;
+    }
+
+    table#example tr {
+        background: #fff;
+        margin-bottom: 12px;
+        border-radius: 10px;
+        padding: 10px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    table#example td {
+        padding: 6px 0;
+        border: none !important;
+    }
+
+    table#example td:before {
+        font-weight: 600;
+        display: inline-block;
+        width: 110px;
+        color: #666;
+    }
+
+    table#example td:nth-of-type(1):before { content: "Nu."; }
+    table#example td:nth-of-type(2):before { content: "Deskrisaun"; }
+    table#example td:nth-of-type(3):before { content: "Upload Husi"; }
+    table#example td:nth-of-type(4):before { content: "Data"; }
+    table#example td:nth-of-type(5):before { content: "Status"; }
+    table#example td:nth-of-type(6):before { content: "Aksaun"; }
+}
+</style>
+
+{% endblock %}

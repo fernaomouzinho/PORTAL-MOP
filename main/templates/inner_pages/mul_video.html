@@ -1,0 +1,35 @@
+{% extends "main/inner_page.html" %}
+{% load static %}
+{% block content %}
+<!-- ======= Breadcrumbs ======= -->
+<section class="breadcrumbs">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>{{ legend }}</h2>
+            <ol>
+                <li>{{ legend }}</li>
+            </ol>
+        </div>
+    </div>
+</section><!-- End Breadcrumbs -->
+
+<!-- ======= Featured Services Section ======= -->
+<section id="featured-services" class="featured-services section-bg">
+    <div class="container">
+        
+        <div class="row no-gutters">
+            {% for video in videos %}
+            <div class="col-lg-6 col-md-6">
+              <div class="icon-box">
+                {{ video.embed_url|safe }}
+                <h4 class="title">{{ video.title }}</h4>
+              </div>
+            </div>
+          {% endfor %}
+        </div><!--end row-->
+    </div><!--end cont-->
+</section><!-- End Featured Services Section -->
+    
+    {% endblock %}
+    {% block scripts %}
+    {% endblock %}

@@ -1,0 +1,98 @@
+.icon {
+	display: inline-block;
+	margin: 2px;
+	height: 16px;
+	width: 16px;
+	background-color: #ccc;
+}
+
+/* ICONS */
+.icon-new {
+	width: 15px;
+	height: 15px;
+    margin-top: 15%;
+	background: #2454D8;
+	border-color: #000;
+	border-radius: 50%;
+}
+.icon-notstarted {
+	width: 15px;
+	height: 15px;
+    margin-top: 15%;
+	background: #3B3C3F;
+	border-color: #000;
+	border-radius: 50%;
+}
+.icon-ongoing {
+	width: 15px;
+	height: 15px;
+    margin-top: 15%;
+	background: #bcdb0a;
+	border-color: #000;
+	border-radius: 50%;
+}
+.icon-pending {
+	width: 15px;
+	height: 15px;
+    margin-top: 15%;
+	background: #ce1616;
+	border-color: #000;
+	border-radius: 50%;
+}
+.icon-complete {
+	width: 15px;
+	height: 15px;
+    margin-top: 15%;
+	background: #07c948;
+	border-color: #000;
+	border-radius: 50%;
+}
+
+.icon-prog0 {
+	width: 70%; height: 70%;
+	background: #FF0000;
+	border: 1px solid #000;
+	border-radius: 50%; display: inline-block;
+	margin-top: -10px !important;
+}
+.icon-prog20 {
+	width: 70%; height: 70%;
+	background: #FF4C00;
+	border: 1px solid #000;
+	border-radius: 50%; display: inline-block;
+	margin-top: -10px !important;
+}
+.icon-prog40 {
+	width: 70%; height: 70%;
+	background: #FF821A;
+	border: 1px solid #000;
+	border-radius: 50%; display: inline-block;
+	margin-top: -10px !important;
+}
+.icon-prog60 {
+	width: 70%; height: 70%;
+	background: #FFD100;
+	border: 1px solid #000;
+	border-radius: 50%; display: inline-block;
+	margin-top: -10px !important;
+}
+.icon-prog80 {
+	width: 70%; height: 70%;
+	background: #B0FB19;
+	border: 1px solid #000;
+	border-radius: 50%; display: inline-block;
+	margin-top: -10px !important;
+}
+.icon-prog100 {
+	width: 70%; height: 70%;
+	background: #47F619;
+	border: 1px solid #000;
+	border-radius: 50%; display: inline-block;
+	margin-top: -10px !important;
+}
+
+/* MARKERS */
+.leaflet-marker-icon {
+	padding: 2px;
+	text-align: center;
+}

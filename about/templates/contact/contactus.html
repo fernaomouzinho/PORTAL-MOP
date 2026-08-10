@@ -1,0 +1,80 @@
+{% extends "web_admin/layout.html" %}
+
+{% block content %}
+
+<div class="container-fluid py-3">
+
+    <!-- Header -->
+    <div class="card border-0 shadow-sm rounded-4 mb-3">
+        <div class="card-header bg-white text-white">
+            <h5 class="mb-0 text-uppercase">{{ legend }}</h5>
+        </div>
+    </div>
+
+    <!-- Table Card -->
+    <div class="card border-0 shadow-sm rounded-4">
+
+        <div class="card-body p-4">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle mb-0" id="example">
+
+                    <thead class="table-light">
+                        <tr>
+                            <th>#</th>
+                            <th>NAME</th>
+                            <th>EMAIL</th>
+                            <th>ASSUNTU</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for obj in objects %}
+                        <tr>
+
+                            <td>{{ forloop.counter }}</td>
+
+                            <td class="fw-semibold">
+                                {{ obj.name }}
+                            </td>
+
+                            <td>
+                                <span class="text-muted">{{ obj.email }}</span>
+                            </td>
+
+                            <td>
+                                <a href="{% url 'admin-contactus-detail' obj.hashed %}"
+                                   class="text-decoration-none fw-semibold text-primary">
+                                    {{ obj.subject }}
+                                </a>
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#example').DataTable({
+            responsive: true,
+            pageLength: 10
+        });
+    });
+</script>
+{% endblock %}

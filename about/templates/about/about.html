@@ -1,0 +1,110 @@
+{% extends "web_admin/layout.html" %}
+
+{% block content %}
+
+<div class="container-fluid py-3">
+
+    <!-- Header -->
+    <div class="card border-0 shadow-sm rounded-4 mb-3">
+        <div class="card-header bg-white text-white d-flex justify-content-between align-items-center">
+            <h5 class="mb-0 text-uppercase">{{ legend }}</h5>
+
+            {% if group == "admin" and objects %}
+            <div class="d-flex gap-2">
+                <a class="btn btn-light btn-sm"
+                   href="{% url 'admin-about-edit' %}">
+                    <i class="fa fa-edit me-1"></i> Edit About
+                </a>
+
+                <a class="btn btn-light btn-sm"
+                   href="{% url 'admin-orgchart-edit' %}">
+                    <i class="fa fa-sitemap me-1"></i> Org Chart
+                </a>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+
+    <!-- Main Card -->
+    <div class="card border-0 shadow-sm rounded-4">
+
+        <div class="card-body p-4">
+
+            <!-- Image -->
+            <div class="text-center mb-4">
+                <img src="{{ objects.image.url }}"
+                     class="img-fluid rounded-4 shadow-sm"
+                     style="max-height: 320px; object-fit: cover;">
+            </div>
+
+            <hr>
+
+            <!-- Content Grid -->
+            <div class="row g-4">
+
+                <!-- TT -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="p-3 border rounded-3 bg-light h-100">
+                        <h6 class="text-primary fw-bold">Vision (TT)</h6>
+                        <p class="small">{{ objects.vision_tt|safe }}</p>
+
+                        <hr>
+
+                        <h6 class="text-primary fw-bold">Mission (TT)</h6>
+                        <p class="small">{{ objects.mission_tt|safe }}</p>
+
+                        <hr>
+
+                        <h6 class="text-primary fw-bold">History (TT)</h6>
+                        <p class="small">{{ objects.hist_tt|safe }}</p>
+                    </div>
+                </div>
+
+                <!-- PT -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="p-3 border rounded-3 bg-light h-100">
+                        <h6 class="text-success fw-bold">Vision (PT)</h6>
+                        <p class="small">{{ objects.vision_pt|safe }}</p>
+
+                        <hr>
+
+                        <h6 class="text-success fw-bold">Mission (PT)</h6>
+                        <p class="small">{{ objects.mission_pt|safe }}</p>
+
+                        <hr>
+
+                        <h6 class="text-success fw-bold">History (PT)</h6>
+                        <p class="small">{{ objects.hist_pt|safe }}</p>
+                    </div>
+                </div>
+
+                <!-- EN -->
+                <div class="col-lg-4 col-md-12">
+                    <div class="p-3 border rounded-3 bg-light h-100">
+                        <h6 class="text-info fw-bold">Vision (EN)</h6>
+                        <p class="small">{{ objects.vision_en|safe }}</p>
+
+                        <hr>
+
+                        <h6 class="text-info fw-bold">Mission (EN)</h6>
+                        <p class="small">{{ objects.mission_en|safe }}</p>
+
+                        <hr>
+
+                        <h6 class="text-info fw-bold">History (EN)</h6>
+                        <p class="small">{{ objects.hist_en|safe }}</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

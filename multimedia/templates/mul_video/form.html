@@ -1,0 +1,50 @@
+{% extends "web_admin/layout.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<ol class="breadcrumb mb-2 mt-1">
+    <li class="breadcrumb-item">
+        <a href="{% url 'admin-video-list' %}">VIDEO</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+        {{ legend|upper }}
+    </li>
+</ol>
+
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-12 col-xl-12">
+
+        <div class="card border-info shadow-lg rounded">
+
+            <div class="card-header">
+                <strong>{{ legend|upper }}</strong>
+            </div>
+
+            <div class="card-body">
+
+                <div class="container-fluid px-0">
+
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+
+                            <div class="form-responsive">
+                                {% crispy form %}
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

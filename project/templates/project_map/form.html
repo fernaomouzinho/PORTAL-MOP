@@ -1,0 +1,49 @@
+{% extends "web_admin/layout.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<ol class="breadcrumb mb-2 mt-1">
+    {% if page == "mapg" %}
+        <li class="breadcrumb-item">
+            <a href="{% url 'admin-map-g-list' %}">FILA</a>
+        </li>
+    {% elif page == "maps" %}
+        <li class="breadcrumb-item">
+            <a href="{% url 'admin-map-s-list' %}">FILA</a>
+        </li>
+    {% else %}
+        <li class="breadcrumb-item">
+            <a href="{% url 'admin-map-p-list' %}">FILA</a>
+        </li>
+    {% endif %}
+
+    <li class="breadcrumb-item active" aria-current="page">
+        {{ legend|upper }}
+    </li>
+</ol>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card border-info shadow-lg pt-1 rounded">
+            
+            <div class="card-header">
+                {{ legend|upper }}
+            </div>
+
+            <div class="card-body">
+
+                <!-- Responsive wrapper -->
+                <div class="table-responsive">
+                    {% crispy form %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

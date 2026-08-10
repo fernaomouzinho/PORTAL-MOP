@@ -1,0 +1,117 @@
+{% extends "web_admin/layout.html" %}
+{% load humanize %}
+
+{% block content %}
+
+<div class="container-fluid py-3">
+
+    <!-- Breadcrumb -->
+    <ol class="breadcrumb bg-white shadow-sm rounded px-3 py-2 mb-3">
+        <li class="breadcrumb-item">
+            <a href="{% url 'admin-proj-dash' %}" class="text-decoration-none">
+                PAINEL
+            </a>
+        </li>
+        <li class="breadcrumb-item active">
+            {{ legend|upper }}
+        </li>
+    </ol>
+
+    <!-- Card -->
+    <div class="card border-0 shadow-sm rounded-4">
+
+        <div class="card-header bg-white">
+            <h5 class="mb-0 text-uppercase">{{ legend }}</h5>
+        </div>
+
+        <div class="card-body p-4">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover table-striped align-middle mb-0"
+                       id="example">
+
+                    <thead class="table-light">
+
+                        <tr>
+                            <th rowspan="2">#</th>
+                            <th colspan="5" class="text-center">PROJETU</th>
+                            <th colspan="5" class="text-center">KONTRATU</th>
+                            <th rowspan="2">OJS</th>
+                        </tr>
+
+                        <tr>
+                            <th>Status</th>
+                            <th>Code</th>
+                            <th>Naran</th>
+                            <th>Kategoria</th>
+                            <th>Tinan</th>
+
+                            <th>Numeru</th>
+                            <th>Montante</th>
+                            <th>Data Hahu</th>
+                            <th>Data Remata</th>
+                            <th>Companha</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for obj in objects %}
+                        <tr>
+
+                            <td>{{ forloop.counter }}</td>
+
+                            <td>{{ obj.statusp }}</td>
+                            <td>{{ obj.code }}</td>
+                            <td class="fw-semibold">{{ obj.name }}</td>
+                            <td>{{ obj.cat }}</td>
+                            <td>{{ obj.year }}</td>
+
+                            <td>{{ obj.cont_number }}</td>
+                            <td>${{ obj.amount|intcomma }}</td>
+                            <td>{{ obj.start_date }}</td>
+                            <td>{{ obj.end_date }}</td>
+
+                            <td>
+                                {% for obj2 in obj.comp %}
+                                    <span class="badge bg-secondary me-1">
+                                        {{ obj2.0 }}
+                                    </span>
+                                {% endfor %}
+                            </td>
+
+                            <td>
+                                <span class="badge bg-dark">
+                                    {{ obj.status }}
+                                </span>
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function () {
+    $('#example').DataTable({
+        responsive: true,
+        pageLength: 10
+    });
+});
+</script>
+{% endblock %}

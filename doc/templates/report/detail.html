@@ -1,0 +1,120 @@
+{% extends "web_admin/layout.html" %}
+
+{% block content %}
+
+<div class="container-fluid py-3">
+
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb bg-light px-3 py-2 rounded-3 shadow-sm">
+
+            <li class="breadcrumb-item">
+                <a href="{% url 'admin-report-list' %}" class="text-decoration-none">
+                    LISTA RELATROIU
+                </a>
+            </li>
+
+            <li class="breadcrumb-item active text-uppercase" aria-current="page">
+                {{ legend }}
+            </li>
+
+        </ol>
+    </nav>
+
+    <!-- Main Card -->
+    <div class="card border-0 shadow-sm rounded-4">
+
+        <!-- Header -->
+        <div class="card-header bg-white text-white">
+            <h5 class="mb-0 text-uppercase">{{ legend }}</h5>
+        </div>
+
+        <!-- Body -->
+        <div class="card-body">
+
+            <!-- Info Table -->
+            <div class="table-responsive mb-3">
+                <table class="table table-bordered align-middle">
+
+                    <tr class="table-light">
+                        <th>Data Publika</th>
+                        <th>Husi</th>
+                    </tr>
+
+                    <tr>
+                        <td>{{ objects.date|date:"d/m/Y" }}</td>
+                        <td>{{ objects.user }}</td>
+                    </tr>
+
+                </table>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="d-flex flex-wrap gap-2 mb-3">
+
+                <a class="btn btn-outline-primary btn-sm"
+                   href="{% url 'admin-report-edit' objects.hashed %}">
+                    <i class="fa fa-edit me-1"></i> Altera
+                </a>
+
+                <a class="btn btn-outline-danger btn-sm"
+                   href="{% url 'admin-report-rem' objects.id %}">
+                    <i class="fa fa-trash me-1"></i> Hapaga
+                </a>
+
+                <a class="btn btn-outline-secondary btn-sm"
+                   href="{% url 'admin-report-pdf' objects.hashed %}"
+                   target="_blank">
+                    <i class="fa fa-file-pdf-o me-1"></i> PDF
+                </a>
+
+            </div>
+
+            <!-- Content Section -->
+            <div class="row g-3">
+
+                <!-- Text -->
+                <div class="col-lg-8 col-md-12">
+
+                    <div class="card border-0 shadow-sm rounded-4 h-100">
+
+                        <div class="card-header bg-light fw-semibold">
+                            {{ objects.title }}
+                        </div>
+
+                        <div class="card-body">
+                            <div class="text-break">
+                                {{ objects.desc|safe }}
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Image -->
+                <div class="col-lg-4 col-md-12">
+
+                    {% if objects.image %}
+                    <div class="card border-0 shadow-sm rounded-4">
+
+                        <img src="{{ objects.image.url }}"
+                             class="img-fluid rounded-4">
+
+                    </div>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

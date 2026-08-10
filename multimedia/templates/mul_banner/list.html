@@ -1,0 +1,120 @@
+{% extends "web_admin/layout.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+
+        <div class="card shadow-lg pt-1 rounded">
+
+            <div class="card-header">
+                {{ legend|upper }}
+            </div>
+
+            <div class="card-body">
+
+                <a class="btn btn-sm btn-info mb-3" href="{% url 'admin-banner-add' %}">
+                    Aumenta <i class="fa fa-plus"></i>
+                </a>
+
+                <!-- RESPONSIVE GALLERY GRID -->
+                <div class="row g-3">
+
+                    {% for obj in objects %}
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+
+                        <div class="card h-100 shadow-sm border-0">
+
+                            <!-- IMAGE -->
+                            <a href="{{ obj.image.url }}" class="fancybox" rel="ligthbox">
+                                <img src="{{ obj.image.url }}"
+                                     class="img-fluid rounded-top"
+                                     style="width:100%; height:180px; object-fit:cover;">
+                            </a>
+
+                            <!-- BODY -->
+                            <div class="card-body text-center p-2">
+
+                                <div class="small fw-semibold">
+                                    {% if obj.is_active %}
+                                        {{ obj.desc_tt }} <i class="fa fa-check text-success"></i>
+                                    {% else %}
+                                        <strike>{{ obj.desc_tt }}</strike>
+                                        <i class="fa fa-ban text-danger"></i>
+                                    {% endif %}
+                                </div>
+
+                                <div class="text-muted small">
+                                    Attr: {{ obj.attr|capfirst }}
+                                </div>
+
+                            </div>
+
+                            <!-- ACTIONS -->
+                            <div class="card-footer bg-white border-0 d-flex justify-content-center gap-1 flex-wrap">
+
+                                {% if obj.is_active %}
+                                    <a class="btn btn-sm btn-warning"
+                                       href="{% url 'admin-banner-dis' obj.id %}">
+                                        <i class="fa fa-ban"></i>
+                                    </a>
+                                {% else %}
+                                    <a class="btn btn-sm btn-success"
+                                       href="{% url 'admin-banner-ena' obj.id %}">
+                                        <i class="fa fa-check"></i>
+                                    </a>
+                                {% endif %}
+
+                                <a class="btn btn-sm btn-info"
+                                   href="{% url 'admin-banner-edit' obj.id %}">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+
+                                <a class="btn btn-sm btn-danger"
+                                   href="{% url 'admin-banner-rem' obj.id %}">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    {% endfor %}
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+<link rel="stylesheet" href="{% static 'main/css/gallery.css' %}">
+<script src="{% static 'main/js/gallery.js' %}"></script>
+
+<style>
+/* better mobile spacing */
+@media (max-width: 576px) {
+    .card-body {
+        padding: 10px;
+    }
+
+    .card img {
+        height: 160px !important;
+    }
+}
+</style>
+
+{% endblock %}

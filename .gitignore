@@ -1,0 +1,16 @@
+EnvPortal/
+venv/
+env/
+__pycache__/
+*.pyc
+.env
+*.env
+*.pem
+*.key
+node_modules/
+.vscode/
+.idea/
+main/templates/inner_pages/proj_map_p.html
+main/templates/inner_pages/proj_map_s.html
+project/templates/project_map/map_p_view.html
+project/templates/project_map/map_s_view.html

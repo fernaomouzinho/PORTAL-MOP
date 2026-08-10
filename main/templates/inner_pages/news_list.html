@@ -1,0 +1,130 @@
+{% extends "main/inner_page.html" %}
+{% load static %}
+{% block content %}
+<!-- ======= Breadcrumbs ======= -->
+<section id="breadcrumbs" class="breadcrumbs">
+	<div class="container">
+		<div class="d-flex justify-content-between align-items-center">
+			<h2>{{ legend }}</h2>
+			<ol>
+				<li>{{ legend }}</li>
+			</ol>
+		</div>
+	</div>
+</section><!-- End Breadcrumbs -->
+
+<section class="inner-page">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-11 border-bottom mb-3 pb-3">
+				<form method="GET">
+					<div class="input-group mb-3">
+						<input type="text" class="form-control" name="q" value="{{ request.GET.q }}" placeholder="{{ search }}..." aria-label="{{ search }}..." aria-describedby="basic-addon2">
+						<button type="submit" class="input-group-text btn-info" id="basic-addon2">{{ search }}</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<br/>
+		<div class="row">
+			<div class="col-lg-10 border-bottom">
+				{% for obj in page_obj %}
+				<div class="row border-bottom mb-3 pb-3">
+					<div class="col-lg-8 pt-4 pt-lg-0 order-1 order-lg-2 content">
+						<small>{{ obj.user|capfirst }} - {% if lang == "en"%}{{ obj.date|date:"M d, Y" }}{% else %}{{ obj.date|date:"d/M/Y" }}{% endif %}</small>
+						{% if lang == "tt" %}
+						<h3><a class="text-success" href="{% url 'news-detail' lang obj.date|date:'Y' obj.date|date:'m' obj.hashed obj.slug_title_tt %}">{{ obj.title_tt }}</a></h3>
+						<p class="description">
+							{{ obj.headline_tt|safe }}
+						</p>
+					
+						{% elif lang == "pt" %}
+							{% if obj.title_pt %}
+								<h3><a class="text-success" href="{% url 'news-detail' lang obj.date|date:'Y' obj.date|date:'m' obj.hashed obj.slug_title_pt %}">{{ obj.title_pt }}</a></h3>
+								<p class="description">
+								{{ obj.headline_pt|safe }}
+								</p>
+							{% else %}
+								<p>A versão em português  ainda não está disponível. </p>
+							{% endif %}
+						{% else %}
+							{% if obj.title_en %}
+								<h3><a class="text-success" href="{% url 'news-detail' lang obj.date|date:'Y' obj.date|date:'m' obj.hashed obj.slug_title_en %}">{{ obj.title_en }}</a></h3>
+								<p class="description">
+								{{ obj.headline_en|safe }}
+								</p>
+							{% else %}
+								<p>The English version is not yet available.</p>
+							{% endif %}
+						{% endif %}
+					</div>
+					<div class="col-lg-4 order-2 order-lg-1">
+						{% if lang == "tt" %}
+							{% if obj.title_tt %}
+								<a href="{% url 'news-detail' lang obj.date|date:'Y' obj.date|date:'m' obj.hashed obj.slug_title_tt %}">
+								<img class="img-fluid rounded" src="{% static 'main/img/blank.jpg' %}" data-src="{{ obj.newsimage.all.0.image_thumbnail.url }}">
+								</a>
+							{% else %}
+								<a href="#">
+								<img class="img-fluid rounded" src="{% static 'main/img/blank.jpg' %}" data-src="{{ obj.newsimage.all.0.image_thumbnail.url }}">
+								</a>
+							{% endif %}
+						{% elif lang == "pt" %}
+							{% if obj.title_pt %}
+								<a href="{% url 'news-detail' lang obj.date|date:'Y' obj.date|date:'m' obj.hashed obj.slug_title_pt %}">
+								<img class="img-fluid rounded" src="{% static 'main/img/blank.jpg' %}" data-src="{{ obj.newsimage.all.0.image_thumbnail.url }}">
+								</a>
+							{% else %}
+								<a href="#">
+								<img class="img-fluid rounded" src="{% static 'main/img/blank.jpg' %}" data-src="{{ obj.newsimage.all.0.image_thumbnail.url }}">
+								</a>
+							{% endif %}
+						{% else %}
+							{% if obj.title_en %}
+								<a href="{% url 'news-detail' lang obj.date|date:'Y' obj.date|date:'m' obj.hashed obj.slug_title_en %}">
+								<img class="img-fluid rounded" src="{% static 'main/img/blank.jpg' %}" data-src="{{ obj.newsimage.all.0.image_thumbnail.url }}">
+								</a>
+							{% else %}
+								<a href="#">
+								<img class="img-fluid rounded" src="{% static 'main/img/blank.jpg' %}" data-src="{{ obj.newsimage.all.0.image_thumbnail.url }}">
+								</a>
+							{% endif %}
+						{% endif %}
+					</div>
+				</div>
+				{% endfor %}
+				
+				{% if page_obj %}
+				{% if page_obj.has_previous %}
+				<a class="btn btn-outline-secondary btn-sm mb-4" href="?page=1"><i class="fa bi bi-chevron-double-left"></i></a>
+				<a class="btn btn-outline-secondary btn-sm mb-4" href="?page={{ page_obj.previous_page_number }}"><i class="bi bi-chevron-left"></i></a>
+				{% endif %}
+				{% for num in page_obj.paginator.page_range %}
+				{% if page_obj.number == num %}
+				<a class="btn btn-secondary btn-sm mb-4" href="?page={{ num }}">{{ num }}</a>
+				{% elif num > page_obj.number|add:'-3' and num > page_obj.number|add:'3' %}
+				<a class="btn btn-outline-secondary btn-sm mb-4" href="?page={{ num }}">{{ num }}</a>
+				{% endif %}
+				{% endfor %}
+				{% if page_obj.has_next %}
+				<a class="btn btn-outline-secondary btn-sm mb-4" href="?page={{ page_obj.next_page_number }}"><i class="bi bi-chevron-right"></i></a>
+				<a class="btn btn-outline-secondary btn-sm mb-4" href="?page={{ page_obj.paginator.num_pages }}"><i class="bi bi-chevron-double-right"></i></a>
+				{% endif %}
+				{% endif %}
+				
+			</div>
+			<div class="col-lg-2 border-bottom">
+				<h5 align="center">{{ lang_data.LBL_ARCHIVE }}</h5>
+				<ul align="center">
+					{% for i in news_group %}
+					<i><a class="px-1" href="{% url 'news-year' lang i.date__year  %}">{{ i.date__year }}</a></i>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+
+{% endblock %}
+{% block scripts %}
+{% endblock %}

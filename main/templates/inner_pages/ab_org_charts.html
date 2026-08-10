@@ -1,0 +1,57 @@
+{% extends "main/inner_page.html" %}
+{% load static %}
+{% block content %}
+<!-- ======= Breadcrumbs ======= -->
+<section id="breadcrumbs" class="breadcrumbs">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+      <h2>{{ legend }}</h2>
+      <ol>
+        <li>{{ legend }}</li>
+      </ol>
+    </div>
+  </div>
+</section><!-- End Breadcrumbs -->
+
+<!-- Contact Start -->
+<section id="about" class="about">
+  <div class="container">
+    <div class="section-title">
+      <!-- <h2>{{ legend }}</h2> -->
+    </div>
+    <div class="row">
+      <div class="col-lg-7 order-1 order-lg-2">
+        <div class="container-embed">
+          <div class="box" style="background: white;color:black;">
+            <embed src="{{ about.org_chart.url }}" type="application/pdf" height="700px" width="100%">
+            </div>
+          </div>
+        </div><!--end col-->
+        <div class="col-lg-5 pt-4 pt-lg-0 order-2 order-lg-1 content">
+          <table class="table table-striped">
+            {% for obj in objects %}
+            <tr>
+              <td width="80%">
+                <a href="{% url 'team-det' obj.id lang %}"><strong><u>{{ obj.name }}</u></strong></a><br/>
+                {% if lang == "pt" %}{{ obj.pos.name_pt }}
+                {% elif lang == "en" %}{{ obj.pos.name_en }}
+                {% else %}{{ obj.pos.name_tt }}{% endif %}
+                <br/><small>
+                {% if lang == "pt" %}
+                {% if obj.div.name_pt %}{{ obj.div.name_pt }}{% elif obj.dg.name_pt %}{{ obj.dg.name_pt }}{% endif %}
+                {% elif lang == "en" %}
+                {% if obj.div.name_en %}{{ obj.div.name_en }}{% elif obj.dg.name_en %}{{ obj.dg.name_en }}{% endif %}
+                {% else %}
+                {% if obj.div.name_tt %}{{ obj.div.name_tt }}{% elif obj.dg.name_tt %}{{ obj.dg.name_tt }}{% endif %}
+                {% endif %}</small>
+              </td>
+              <td align="right"><img data-src="{{ obj.image.url }}" width="80%"></td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div><!--end col-->
+      </div><!--end row-->
+    </div><!--end cont-->
+  </section>
+  
+  {% endblock content %}

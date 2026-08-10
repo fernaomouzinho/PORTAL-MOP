@@ -1,0 +1,81 @@
+{% extends "web_admin/layout.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container-fluid py-3">
+
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb bg-light px-3 py-2 rounded-3 shadow-sm">
+
+            {% if page == "about" %}
+                <li class="breadcrumb-item">
+                    <a href="{% url 'admin-about' %}" class="text-decoration-none">ABOUT</a>
+                </li>
+            {% elif page == "org" %}
+                <li class="breadcrumb-item">
+                    <a href="{% url 'admin-about' %}" class="text-decoration-none">ABOUT</a>
+                </li>
+            {% elif page == "cont" %}
+                <li class="breadcrumb-item">
+                    <a href="{% url 'admin-about' %}" class="text-decoration-none">ABOUT</a>
+                </li>
+            {% endif %}
+
+            <li class="breadcrumb-item active text-uppercase">
+                {{ legend }}
+            </li>
+
+        </ol>
+    </nav>
+
+    <!-- Form Card -->
+    <div class="row justify-content-center">
+
+        <div class="col-lg-9 col-md-10 col-sm-12">
+
+            <div class="card border-0 shadow-sm rounded-4">
+
+                <!-- Header -->
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0 text-uppercase">{{ legend }}</h5>
+                </div>
+
+                <!-- Body -->
+                <div class="card-body p-4">
+
+                    {% crispy form %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        // Image preview (safe version)
+        $("input[type='file']").on("change", function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const output = document.getElementById('output');
+                if (output) {
+                    output.src = URL.createObjectURL(file);
+                }
+            }
+        });
+
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  {% if title %}<title>MOP - {{title}}</title>
+  {% else %}<title>PORTAL MOP</title>{% endif %}
+  <meta name="description" content="MOP">
+  <meta name="keywords" content="Key word: MOP, Timor Leste">
+  <meta http-equiv="Copyright" content="MOP">
+  <meta name="author" content="MOP">
+  <meta name="developed" content="KINOS">
+  <meta http-equiv="imagetoolbar" content="no">
+  <meta name="language" content="Timor Leste">
+  <meta name="revisit-after" content="7">
+  <meta name="webcrawlers" content="all">
+  <meta name="rating" content="general">
+  <meta name="spiders" content="all">
+
+  <!-- Favicons -->
+  <link href="{% static 'main/img/logo.png' %}" rel="icon">
+  <link href="{% static 'main/img/logo.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'main/assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+  <link href="{% static 'main/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'main/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'main/assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'main/assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'main/assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'main/assets/css/style.css' %}" rel="stylesheet">
+  {% if fb %}
+  <meta property="og:url"           content="https://mop.gov.tl{{ request.get_full_path }}" />
+  <meta property="og:type"          content="website" />
+  <meta property="og:title"         content="{{ fb.0 }}" />
+  <meta property="og:description"   content="{{ fb.1 }}" />
+  <meta property="og:image"         content="{{ fb.2 }}" />
+  {% endif %}
+  <!-- =======================================================
+  * Template Name: Green - v4.0.1
+  * Template URL: https://bootstrapmade.com/green-free-one-page-bootstrap-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+    fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+  <!-- ======= Top Bar ======= -->
+  {% include "main/topbar.html" %}
+
+  <!-- ======= Header ======= -->
+  {% if lang == "pt" %}
+  {% include 'main/header_pt.html' %}
+  {% elif lang == "en" %}
+  {% include 'main/header_en.html' %}
+  {% else %}
+  {% include 'main/header_tt.html' %}
+  {% endif %}
+  <!-- End Header -->
+
+  
+  <main id="main">
+    {% block content %}{% endblock %}
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  {% include "main/footer.html" %}
+  <!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'main/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'main/assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'main/assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'main/assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'main/assets/js/main.js' %}"></script>
+  <script src="{% static 'main/js/observer.js' %}"></script>
+  <!-- Load Facebook SDK for JavaScript -->
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+    fjs.parentNode.insertBefore(js, fjs);
+} (document, 'script', 'facebook-jssdk'));
+</script>
+{% block scripts %}{% endblock %}
+</body>
+
+</html>

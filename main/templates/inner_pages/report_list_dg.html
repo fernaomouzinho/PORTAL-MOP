@@ -1,0 +1,122 @@
+{% extends "main/inner_page.html" %}
+{% load static %}
+{% block content %}
+<!-- ======= Breadcrumbs ======= -->
+<section id="breadcrumbs" class="breadcrumbs">
+	<div class="container">
+		<div class="d-flex justify-content-between align-items-center">
+			<h2>{{ legend }}</h2>
+			<ol>
+				<li>{{ legend }}</li>
+			</ol>
+		</div>
+	</div>
+</section><!-- End Breadcrumbs -->
+
+<section id="about" class="about">
+	<div class="container">
+		<div class="section-title"><h2>{{ legend }}</h2></div>
+		<div class="row">
+			<div class="col-lg-10">
+				<div class="row">
+					<div class="col-lg-12">
+						<div><h5>{{legend_1}} {{dg|upper}}<hr></h5></div>
+						<div class="row mb-3 pb-3">
+							<div class="col-lg-12 pt-4 pt-lg-0 order-2 order-lg-1 content">	
+							<table class="table table-striped">
+							{% for obj in page_obj %}
+							<tr><td><a href="{% url 'report-det' lang obj.hashed %}">{{ obj.title }}</a></td></tr>
+							{% endfor %}
+						</table>
+						{% if page_obj %}
+						{% if page_obj.has_previous %}
+						<a class="btn btn-outline-secondary btn-sm mb-4" href="?page=1"><i class="fa bi bi-chevron-double-left"></i></a>
+						<a class="btn btn-outline-secondary btn-sm mb-4" href="?page={{ page_obj.previous_page_number }}"><i class="bi bi-chevron-left"></i></a>
+						{% endif %}
+						{% for num in page_obj.paginator.page_range %}
+						{% if page_obj.number == num %}
+						<a class="btn btn-secondary btn-sm mb-4" href="?page={{ num }}">{{ num }}</a>
+						{% elif num > page_obj.number|add:'-3' and num > page_obj.number|add:'3' %}
+						<a class="btn btn-outline-secondary btn-sm mb-4" href="?page={{ num }}">{{ num }}</a>
+						{% endif %}
+						{% endfor %}
+						{% if page_obj.has_next %}
+						<a class="btn btn-outline-secondary btn-sm mb-4" href="?page={{ page_obj.next_page_number }}"><i class="bi bi-chevron-right"></i></a>
+						<a class="btn btn-outline-secondary btn-sm mb-4" href="?page={{ page_obj.paginator.num_pages }}"><i class="bi bi-chevron-double-right"></i></a>
+						{% endif %}
+						{% endif %}
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-12 pt-1 ">
+						<div><h5>{{legend_3}}<hr></h5></div>
+						<div class="row p-2">
+								{% for obj in all_owner_report %}
+								<div class="col-lg-3 p-2 order-2 order-lg-1 bg-success">
+									<div class="portfolio text-center">
+									<a href="{% url 'report-dg-list' lang obj.code %}">
+										{% if obj.code == 'dgaf'%}
+										<img data-src="{% static 'main/img/cover/dgaf.png' %}" width="60%" height="60%" alt="" class="img-fluid"><br>
+										{% elif obj.code == 'dghu'%}
+										<img data-src="{% static 'main/img/cover/dghu.png' %}" width="60%" height="60%" alt="" class="img-fluid"><br>
+										{% elif obj.code == 'dgreas'%}
+										<img data-src="{% static 'main/img/cover/dgreas.png' %}" width="60%" height="60%" alt="" class="img-fluid"><br>
+										{% elif obj.code == 'dgeppcc'%}
+										<img data-src="{% static 'main/img/cover/dgeppcc.png' %}" width="60%" height="60%" alt="" class="img-fluid"><br>
+										{% endif %}	
+										<div class="portfolio-info text-center pt-1">	
+										{{obj.code|upper}} 
+										
+										{% for obj_1 in count_report_own %}
+										
+										{% if obj.code == obj_1.owner__code %}	
+										   ({{obj_1.total}})
+										
+										{% endif %}
+
+										{% endfor %}
+										
+								
+
+										</a>
+										</div> 
+									</div>
+								</div> 
+								{% endfor %}
+							
+						</div>
+					</div>
+			</div>
+			</div>
+
+			
+			<div class="col-lg-2">
+				<div class="section-title pb-0 mb-0"><h5>{{legend_2}}<hr></h5></div>
+				<div class="row">
+					<div class="col-lg-12">
+						<ul class="list-group">
+						 {% for obj in year_a %}
+							<li class="list-group-item d-flex justify-content-between align-items-center">
+							<a href="{% url 'report-year-list' lang obj.year %}">{{ obj.year }}</a>
+							<span class="badge bg-success rounded-pill">
+							{% for obj_1 in count_report_year %}
+							{% if obj_1.date__year == obj.year  %}
+							{{obj_1.total}}
+							{% endif %}
+							{% endfor %}
+							</span>
+							</li>
+						{% endfor %}
+						
+						</ul>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	{% endblock %}
+	{% block scripts %}
+	{% endblock %}

@@ -1,0 +1,99 @@
+{% extends "web_admin/layout.html" %}
+
+{% block content %}
+
+<div class="container-fluid py-3">
+
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb bg-light px-3 py-2 rounded-3 shadow-sm">
+
+            <li class="breadcrumb-item">
+                <a href="{% url 'admin-doc-list' %}" class="text-decoration-none">
+                    LISTA DOKUMENTU
+                </a>
+            </li>
+
+            <li class="breadcrumb-item active text-uppercase" aria-current="page">
+                {{ legend }}
+            </li>
+
+        </ol>
+    </nav>
+
+    <!-- Main Card -->
+    <div class="card border-0 shadow-sm rounded-4">
+
+        <!-- Header -->
+        <div class="card-header bg-white text-white d-flex justify-content-between align-items-center">
+            <h5 class="mb-0 text-uppercase">{{ legend }}</h5>
+        </div>
+
+        <!-- Body -->
+        <div class="card-body">
+
+            <!-- Info Table -->
+            <div class="table-responsive mb-3">
+                <table class="table table-bordered align-middle">
+
+                    <tr class="table-light">
+                        <th>Tipu Dokumentu</th>
+                        <th>Data Upload</th>
+                        <th>Upload Husi</th>
+                    </tr>
+
+                    <tr>
+                        <td>{{ doc.doc_type }}</td>
+                        <td>{{ doc.datetime|date:"d/m/Y" }}</td>
+                        <td>{{ doc.user }}</td>
+                    </tr>
+
+                </table>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="d-flex flex-wrap gap-2 mb-3">
+
+                <a class="btn btn-outline-primary btn-sm"
+                   href="{% url 'admin-doc-edit' doc.hashed %}">
+                    <i class="fa fa-edit me-1"></i> Altera
+                </a>
+
+                <a class="btn btn-outline-danger btn-sm"
+                   href="{% url 'admin-doc-rem' doc.id %}">
+                    <i class="fa fa-trash me-1"></i> Hapaga
+                </a>
+
+                <a class="btn btn-outline-secondary btn-sm"
+                   href="{% url 'admin-doc-pdf' doc.hashed %}"
+                   target="_blank">
+                    <i class="fa fa-file-pdf-o me-1"></i> Hare PDF
+                </a>
+
+            </div>
+
+            <!-- Document Content -->
+            <div class="card border-0 shadow-sm rounded-4">
+
+                <div class="card-header bg-light fw-semibold">
+                    {{ doc.title }}
+                </div>
+
+                <div class="card-body">
+                    <div class="text-break">
+                        {{ doc.desc|safe }}
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

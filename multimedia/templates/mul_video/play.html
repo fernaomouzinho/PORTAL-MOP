@@ -1,0 +1,40 @@
+{% extends "web_admin/layout.html" %}
+
+{% block content %}
+
+<ol class="breadcrumb mb-2 mt-1">
+    <li class="breadcrumb-item">
+        <a href="{% url 'admin-video-list' %}">VIDEO</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+        {{ legend|upper }}
+    </li>
+</ol>
+
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-12">
+
+        <div class="card border-info shadow-lg rounded">
+
+            <div class="card-body text-center">
+
+                <h5 class="mb-3">
+                    {{ objects.title }}
+                </h5>
+
+                <!-- RESPONSIVE VIDEO WRAPPER -->
+                <div class="ratio ratio-16x9">
+                    {{ objects.embed_url|safe }}
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

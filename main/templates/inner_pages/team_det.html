@@ -1,0 +1,35 @@
+{% extends "main/inner_page.html" %}
+{% load static %}
+{% block content %}
+<!-- ======= Breadcrumbs ======= -->
+<section id="breadcrumbs" class="breadcrumbs">
+	<div class="container">
+		<div class="d-flex justify-content-between align-items-center">
+			<h2>{{ legend }}</h2>
+			<ol>
+				<li>{{ legend }}</li>
+			</ol>
+		</div>
+	</div>
+</section><!-- End Breadcrumbs -->
+
+<section id="about" class="about">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 order-1 order-lg-2">
+				<img src="{% static 'main/img/blank.jpg' %}" data-src="{{ team.image.url }}" width="90%">
+			</div>
+			<div class="col-lg-8 pt-4 pt-lg-0 order-2 order-lg-1 content">
+				<h3>{{ team.name }}</h3>
+                <h5>{% if lang == "pt" %}{{ team.pos.name_pt }}
+                    {% elif lang == "en" %}{{ team.pos.name_en }}
+                    {% else %}{{ team.pos.name_tt }}{% endif %}</h5>
+				<p>{{ team.desc|safe }}</p>
+			</div>
+		</div>
+	</div>
+</section>
+<hr/>
+{% endblock %}
+{% block scripts %}
+{% endblock %}

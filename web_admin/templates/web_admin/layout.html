@@ -1,0 +1,276 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+{% if title %}
+<title>MOP - {{ title }}</title>
+{% else %}
+<title>MOP</title>
+{% endif %}
+
+<link rel="icon" href="{% static 'main/img/logo-mop.png' %}">
+<link rel="stylesheet" href="{% static 'web_admin/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'main/font-awesome/css/font-awesome.min.css' %}">
+<link rel="stylesheet" href="{% static 'web_admin/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'web_admin/css/styles.css' %}">
+<link rel="stylesheet" href="{% static 'web_admin/datatables/css/jquery.dataTables.min.css' %}">
+
+
+
+
+
+{% block headStyle %}{% endblock %}
+</head>
+
+<body>
+
+<div class="portal-wrapper">
+
+    <!-- Sidebar -->
+    {% load static %}
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+
+    <!-- BRAND -->
+    <div class="sidebar-brand">
+
+        <a href="{% url 'admin_home' %}" class="brand-link">
+
+            <div class="brand-logo-wrapper">
+                <img src="{% static 'main/img/logo-mop2.png' %}" class="brand-logo">
+            </div>
+
+            <div class="brand-text">
+                <div class="brand-title">PORTAL</div>
+                <small class="brand-subtitle">MINISTÉRIO OBRAS PÚBLICAS</small>
+            </div>
+
+        </a>
+
+        <button class="sidebar-toggle" id="sidebarToggle">
+            <i class="fa fa-bars"></i>
+        </button>
+
+    </div>
+
+    <!-- MENU -->
+    <div class="sidebar-menu">
+
+        <ul class="sidebar-nav">
+
+            <li class="nav-item {% if request.resolver_match.url_name == 'admin_home' %}active{% endif %}">
+                <a href="{% url 'admin_home' %}" class="nav-link">
+                    <i class="fa fa-home"></i>
+                    <span>Varanda</span>
+                </a>
+            </li>
+
+            <!-- PROFILE -->
+            <li class="nav-item has-submenu">
+                <a href="#" class="nav-link">
+                    <i class="fa fa-user-circle"></i>
+                    <span>Perfil</span>
+                    <i class="fa fa-angle-down arrow"></i>
+                </a>
+
+                <ul class="submenu">
+                    <li><a href="{% url 'admin-about' %}"><i class="fa fa-id-card"></i> Konaba</a></li>
+                    <li><a href="{% url 'admin-struc-list' %}"><i class="fa fa-sitemap"></i> Estrutura</a></li>
+                    <li><a href="{% url 'admin-cont-view' %}"><i class="fa fa-phone"></i> Kontaktu</a></li>
+                    <li><a href="{% url 'admin-cont-mun-list' %}"><i class="fa fa-phone"></i> Kontaktu Municipiu</a></li>
+                    <li><a href="{% url 'admin-dg-list' %}"><i class="fa fa-list"></i> DG</a></li>
+                    <li><a href="{% url 'admin-div-list' %}"><i class="fa fa-list"></i> Diresaun Nacional</a></li>
+                    <li><a href="{% url 'admin-otdiv-list' %}"><i class="fa fa-list"></i> Instituisaun Tutela</a></li>
+                    <li><a href="{% url 'admin-partner-list' %}"><i class="fa fa-list"></i> Parceiru</a></li>
+                </ul>
+            </li>
+
+            <!-- NEWS -->
+            <li class="nav-item">
+                <a href="{% url 'admin-news-list' %}" class="nav-link">
+                    <i class="fa fa-file-text-o"></i>
+                    <span>Nutisia</span>
+                </a>
+            </li>
+
+            <!-- DOCUMENTS -->
+            <li class="nav-item has-submenu">
+                <a href="#" class="nav-link">
+                    <i class="fa fa-folder"></i>
+                    <span>Dokumentus</span>
+                    <i class="fa fa-angle-down arrow"></i>
+                </a>
+
+                <ul class="submenu">
+                    <li><a href="{% url 'admin-doc-list' %}"><i class="fa fa-file"></i> Lei & Politika</a></li>
+                    <li><a href="{% url 'admin-report-list' %}"><i class="fa fa-file"></i> Relatoriu</a></li>
+                </ul>
+            </li>
+
+            <!-- PUBLICATIONS -->
+            <li class="nav-item has-submenu">
+                <a href="#" class="nav-link">
+                    <i class="fa fa-bullhorn"></i>
+                    <span>Publikasaun</span>
+                    <i class="fa fa-angle-down arrow"></i>
+                </a>
+
+                <ul class="submenu">
+                    <li><a href="{% url 'admin-ann-list' %}"><i class="fa fa-briefcase"></i> Anunsiu</a></li>
+                    <li><a href="{% url 'admin-vaga-list' %}"><i class="fa fa-briefcase"></i> Vaga</a></li>
+                    <li><a href="{% url 'admin-tender-list' %}"><i class="fa fa-gavel"></i> Tender</a></li>
+                </ul>
+            </li>
+
+         
+            <li class="nav-item">
+                <a href="{% url 'admin-proj-dash' %}" class="nav-link">
+                    <i class="fa fa-list"></i>
+                    <span>Projetu</span>
+                </a>
+            </li>
+
+            <!-- MEDIA -->
+            <li class="nav-item has-submenu">
+                <a href="#" class="nav-link">
+                    <i class="fa fa-camera"></i>
+                    <span>Multimedia</span>
+                    <i class="fa fa-angle-down arrow"></i>
+                </a>
+
+                <ul class="submenu">
+                    <li><a href="{% url 'admin-banner-list' %}"><i class="fa fa-image"></i> Banner</a></li>
+                    <li><a href="{% url 'admin-album-list' %}"><i class="fa fa-image"></i> Album</a></li>
+                    <li><a href="{% url 'admin-video-list' %}"><i class="fa fa-image"></i> Video</a></li>
+                </ul>
+            </li>
+
+          
+
+        </ul>
+
+    </div>
+
+</aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+
+        <!-- Topbar -->
+        <div class="topbar">
+
+            <div class="d-flex align-items-center">
+                <button class="toggle-btn" onclick="toggleSidebar()">
+                    <i class="fa fa-bars"></i>
+                </button>
+
+                {% comment %} <strong>{{ title|default:"Dashboard" }}</strong> {% endcomment %}
+            </div>
+
+             <div class="dropdown d-flex align-items-center">
+              <a class="d-flex align-items-center gap-2 text-white text-decoration-none dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">
+
+                  <i class="fa fa-user-circle"></i>
+                  <span>{{ request.portal_user }}</span>
+
+              </a>
+
+              <ul class="dropdown-menu dropdown-menu-end">
+                  <li>
+                      <a class="dropdown-item" href="#">
+                          <i class="fa fa-user me-2"></i> Perfil
+                      </a>
+                  </li>
+
+                 
+
+                  <li><hr class="dropdown-divider"></li>
+
+                  <li>
+                      <a class="dropdown-item text-danger" href="{% url 'logout' %}">
+                          <i class="fa fa-sign-out me-2"></i> Sai
+                      </a>
+                  </li>
+              </ul>
+          </div>
+
+        </div>
+
+        <!-- Page Content -->
+        <div class="page-content">
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} p-2">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            {% block content %}{% endblock %}
+
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            Copyright © 2023 MOP | All rights reserved
+        </div>
+
+    </div>
+
+</div>
+
+<script src="{% static 'web_admin/js/jquery.min.js' %}"></script>
+<script src="{% static 'web_admin/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'web_admin/datatables/js/jquery.dataTables.min.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+const sidebar = document.getElementById("sidebar");
+const toggleBtn = document.getElementById("sidebarToggle");
+
+function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    sidebar.classList.toggle("show");
+}
+
+/* ======================
+   COLLAPSE SIDEBAR
+====================== */
+toggleBtn.addEventListener("click", () => {
+    sidebar.classList.toggle("collapsed");
+
+    localStorage.setItem(
+        "sidebarState",
+        sidebar.classList.contains("collapsed") ? "collapsed" : "expanded"
+    );
+});
+
+/* restore state */
+if (localStorage.getItem("sidebarState") === "collapsed") {
+    sidebar.classList.add("collapsed");
+}
+
+/* ======================
+   SUBMENU TOGGLE
+====================== */
+document.querySelectorAll(".has-submenu > .nav-link").forEach(link => {
+    link.addEventListener("click", function (e) {
+        e.preventDefault();
+        this.parentElement.classList.toggle("open");
+    });
+});
+</script>
+
+{% block scripts %}{% endblock %}
+
+</body>
+</html>

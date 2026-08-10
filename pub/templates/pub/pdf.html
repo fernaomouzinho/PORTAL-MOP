@@ -1,0 +1,17 @@
+{% extends "web_admin/layout.html" %}
+{% block content %}
+<ol class="breadcrumb mb-2 mt-1">
+    <li class="breadcrumb-item"><a href="{% url 'admin-pub-det' objects.hashed %}">DETALHA</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ legend|upper }}</li>
+</ol>
+	<div class="row">
+		<div class="col-sm-12">
+	{% if objects.file %}
+			<embed src="{{ objects.file.url }}" type="application/pdf" height="700px" width="100%">
+		</div>
+	{% else %}
+		<p>Page not found!</p>
+	{% endif %}
+	</div>
+	<hr/>
+{% endblock %}

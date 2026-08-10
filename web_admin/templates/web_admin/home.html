@@ -1,0 +1,311 @@
+{% extends "web_admin/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <!-- PAGE HEADER -->
+    <div class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden">
+        <div class="card-body p-4 bg-white">
+
+            <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between">
+
+                <div>
+                    <h2 class="fw-bold text-success mb-1">
+                        <i class="fa fa-dashboard me-2"></i>
+                        SUMARIU PORTAL
+                    </h2>
+
+                    <p class="text-muted mb-0">
+                        Dadus publikasaun Portal Ministériu Obras Públikas
+                    </p>
+                </div>
+
+                <div class="mt-3 mt-md-0">
+                    <span class="badge bg-success-subtle text-success px-3 py-2 rounded-pill">
+                        Tinan {{ current_year }}
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div style="height:4px;background:linear-gradient(90deg,#198754,#20c997,#0d6efd);"></div>
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- OVERVIEW KPI CARDS -->
+    <!-- ========================= -->
+    <div class="row g-4 mb-4">
+
+        <!-- NEWS -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+                <div class="card-body text-center p-4">
+                    <i class="fa fa-newspaper-o text-success mb-2" style="font-size:24px;"></i>
+                    <h6>Total Nutisia</h6>
+                    <h2 class="text-success">{{ total_news }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+                <div class="card-body text-center p-4">
+                    <i class="fa fa-calendar text-success mb-2" style="font-size:24px;"></i>
+                    <h6>Nutisia Tinan {{current_year}}</h6>
+                    <h2 class="text-success">{{ this_year_news }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- TENDER -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+                <div class="card-body text-center p-4">
+                    <i class="fa fa-file-text-o text-primary mb-2" style="font-size:24px;"></i>
+                    <h6>Total Tender</h6>
+                    <h2 class="text-primary">{{ total_tender }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+    <div class="card border-0 shadow-sm rounded-4 h-100">
+
+        <div class="card-body p-4">
+
+            <!-- header row -->
+            <div class="d-flex align-items-center justify-content-between mb-3">
+
+                <div>
+                    <h6 class="mb-0">Tender Tinan {{current_year}}</h6>
+                    <small class="text-muted">Vizaun Jeral Estatus</small>
+                </div>
+
+                <i class="fa fa-line-chart text-primary" style="font-size:26px;"></i>
+
+            </div>
+
+            <!-- main value -->
+            <div class="mb-3">
+                <h2 class="text-primary fw-bold mb-0">
+                    {{ this_year_tender }}
+                </h2>
+            </div>
+
+            <!-- horizontal breakdown -->
+            <div class="d-flex justify-content-between text-center">
+
+                <div>
+                    <div class="small text-success fw-semibold">
+                        {{ open_tender|default:"0" }}
+                    </div>
+                    <div class="text-muted" style="font-size:11px;">
+                        Loke
+                    </div>
+                </div>
+
+                <div>
+                    <div class="small text-danger fw-semibold">
+                        {{ closed_tender|default:"0"  }}
+                    </div>
+                    <div class="text-muted" style="font-size:11px;">
+                        Taka
+                    </div>
+                </div>
+
+                <div>
+                    <div class="small text-warning fw-semibold">
+                        {{ awarded_tender|default:"0"  }}
+                    </div>
+                    <div class="text-muted" style="font-size:11px;">
+                        Manan 
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+    </div>
+
+  
+   
+      <div class="card border-0 shadow-sm rounded-4 mb-4">
+
+          <div class="card-header bg-white rounded-top-4 py-3">
+              <strong>
+                  <i class="fa fa-bar-chart me-2 text-primary"></i>
+                  SUMARIU NUTISIA TUIR KATEGORIA
+              </strong>
+          </div>
+
+          <div class="table-responsive">
+              <table class="table table-hover align-middle mb-0">
+
+                  <thead class="table-light">
+                      <tr>
+                          <th>No</th>
+                          <th>Kategoria</th>
+                          <th class="text-center">Total</th>
+                          <th class="text-center">Tinan {{current_year}}</th>
+                          <th class="text-center">Hare</th>
+                      </tr>
+                  </thead>
+
+                  <tbody>
+                      {% for item in category_summary %}
+                      <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td class="fw-semibold">{{ item.name_tt }}</td>
+
+                          <td class="text-center">
+                              <span class="badge bg-success rounded-pill">{{ item.total_news }}</span>
+                          </td>
+
+                          <td class="text-center">
+                              <span class="badge bg-primary rounded-pill">{{ item.total_this_year }}</span>
+                          </td>
+
+                          <td class="text-center">
+                              <span class="badge bg-warning text-dark rounded-pill">
+                                  {{ item.total_views|default:0 }}
+                              </span>
+                          </td>
+                      </tr>
+                      {% empty %}
+                      <tr>
+                          <td colspan="5" class="text-center py-4 text-muted">
+                             Dadus Kategoria La Iha
+                          </td>
+                      </tr>
+                      {% endfor %}
+                  </tbody>
+
+              </table>
+          </div>
+
+      </div>
+
+
+      <div class="row g-4">
+
+{% for cat in category_tender %}
+
+<div class="col-md-6 col-lg-4">
+    <div class="card border-0 shadow-sm rounded-4 h-100">
+
+        <div class="card-body p-4">
+
+            <h5 class="fw-bold text-primary mb-3">
+                {{ cat.name_tt }}
+            </h5>
+
+            <h2 class="mb-3">{{ cat.total }}</h2>
+
+            <div class="row text-center g-2">
+
+                <div class="col-6">
+                    <div class="bg-light rounded p-2">
+                        <small>Tinan {{current_year}}</small>
+                        <div class="fw-bold text-primary">
+                            {{ cat.this_year }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="bg-light rounded p-2">
+                        <small>Loke</small>
+                        <div class="fw-bold text-success">
+                            {{ cat.open_total }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="bg-light rounded p-2">
+                        <small>Taka</small>
+                        <div class="fw-bold text-danger">
+                            {{ cat.closed_total }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="bg-light rounded p-2">
+                        <small>Manan</small>
+                        <div class="fw-bold text-warning">
+                            {{ cat.awarded_total }}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+{% endfor %}
+
+</div>
+ </div>
+{% endblock %}
+
+{% block scripts %} 
+<script src="{% static 'main/charts/js/highcharts.js' %}"></script> 
+<script src="{% static 'main/charts/js/modules/exporting.js' %}"></script>
+<script src="{% static 'main/charts/js/modules/series-label.js' %}"></script>
+<script src="{% static 'main/charts/js/modules/export-data.js' %}"></script>
+
+<script> 
+    (function () {
+
+    let running = false;
+
+    const LOGIN_URL = "http://localhost:5173/login";
+    const INTERVAL = 10000;
+
+    async function checkPortalSession() {
+
+        if (running) return;
+        running = true;
+
+        try {
+            const res = await fetch("/api/portal-auth-status/", {
+                method: "GET",
+                credentials: "include",
+                cache: "no-store"
+            });
+
+            if (!res.ok) return;
+
+            const data = await res.json();
+
+            //  ONLY TRUST BACKEND RESULT
+            if (data.active === false) {
+                window.location.replace(LOGIN_URL);
+            }
+
+        } catch (e) {
+            // ignore
+        } finally {
+            running = false;
+        }
+    }
+
+    checkPortalSession();
+    setInterval(checkPortalSession, INTERVAL);
+
+    })();
+</script> 
+{% endblock %}

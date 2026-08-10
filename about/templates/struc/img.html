@@ -1,0 +1,73 @@
+{% extends "web_admin/layout.html" %}
+{% block content %}
+<ol class="breadcrumb mb-2 mt-1">
+	<li class="breadcrumb-item"><a href="{% url 'admin-struc-list' %}">LISTA ESTRUTURA</a></li>
+	<li class="breadcrumb-item active" aria-current="page">{{ legend|upper }}</li>
+</ol>
+<div class="row">
+	<div class="col-sm-12">
+		<div class="card border-info shadow-lg pt-1 rounded">
+			<div class="card-header">{{ legend|upper }}</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-sm-2"></div>
+					{% for obj1 in objects1 %}
+					<div class="col-sm-4">
+						<div class="card">
+							<div class="card-body">
+								<center><img src="{{ obj1.image.url }}" width="80%" /></center>
+							</div>
+							<div class="card-footer">
+								<center>
+									<a href="{% url 'admin-struc-det' obj1.id %}">{{ obj1.name|upper }}</a>
+									<br/>{{ obj1.pos }}
+								</center>
+							</div>
+						</div><!--end card-->
+					</div><!--end div-->
+					{% endfor %}
+					<div class="col-sm-2"></div>
+				</div><!--end row-->
+				<hr/>
+				<div class="row">
+					{% for obj2 in objects2 %}
+					<div class="col-sm-4">
+						<div class="card">
+							<div class="card-body">
+								<center><img src="{{ obj2.image.url }}" width="80%" /></center>
+							</div>
+							<div class="card-footer">
+								<center>
+									<a href="{% url 'admin-struc-det' obj2.id %}">{{ obj2.name|upper }}</a>
+									<br/>{{ obj2.pos }}<br/>{{ obj2.dg.code }}
+								</center>
+							</div>
+						</div><!--end card-->
+					</div><!--end div-->
+					{% endfor %}
+				</div><!--end row-->
+				<hr/>
+				<div class="row">
+					{% for obj3 in objects3 %}
+					<div class="col-sm-3">
+						<div class="card">
+							<div class="card-body">
+								<center><img src="{{ obj3.image.url }}" width="80%" /></center>
+							</div>
+							<div class="card-footer">
+								<center>
+									<a href="{% url 'admin-struc-det' obj3.id %}">{{ obj3.name|upper }}</a>
+									<br/>{{ obj3.pos }}<br/>{{ obj3.div.code }}
+								</center>
+							</div>
+						</div><!--end card-->
+					</div><!--end div-->
+					{% endfor %}
+				</div><!--end row-->
+			</div> <!--end card-body-->
+		</div> <!--end card-->
+	</div> <!--end col-->
+</div> <!--end row-->
+{% endblock %}
+{% block scripts %}
+{% endblock %}

@@ -1,0 +1,100 @@
+{% extends "web_admin/layout.html" %}
+
+{% block content %}
+
+<div class="container-fluid py-3">
+
+    <!-- Header -->
+    <div class="card border-0 shadow-sm rounded-4 mb-3">
+        <div class="card-header bg-white text-white d-flex justify-content-between align-items-center">
+            <h5 class="mb-0 text-uppercase">{{ legend }}</h5>
+        </div>
+    </div>
+
+    <!-- Action Button -->
+    <div class="mb-3">
+        <a class="btn btn-primary btn-sm"
+           href="{% url 'admin-cont-mun-add' %}">
+            <i class="fa fa-plus me-1"></i> Aumenta
+        </a>
+    </div>
+
+    <!-- Table Card -->
+    <div class="card border-0 shadow-sm rounded-4">
+
+        <div class="card-body p-4">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle mb-0">
+
+                    <thead class="table-light">
+                        <tr>
+                            <th>#</th>
+                            <th>Municipiu</th>
+                            <th>Enderesu</th>
+                            <th>Telemovel</th>
+                            <th>Email</th>
+                            <th>Responsavel</th>
+                            <th class="text-center">Aksi</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for obj in objects %}
+                        <tr>
+
+                            <td>{{ forloop.counter }}</td>
+
+                            <td class="fw-semibold">
+                                {{ obj.mun }}
+                            </td>
+
+                            <td class="text-muted small">
+                                {{ obj.address }}
+                            </td>
+
+                            <td>{{ obj.phone }}</td>
+
+                            <td>{{ obj.email }}</td>
+
+                            <td>{{ obj.name }}</td>
+
+                            <td class="text-center">
+
+                                <a href="{% url 'admin-cont-mun-edit' obj.id %}"
+                                   class="text-primary"
+                                   title="Edit">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.table').DataTable({
+            responsive: true,
+            pageLength: 10
+        });
+    });
+</script>
+{% endblock %}

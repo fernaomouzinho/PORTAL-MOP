@@ -1,0 +1,85 @@
+{% extends "web_admin/layout.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<ol class="breadcrumb mb-2 mt-1">
+    <li class="breadcrumb-item">
+        <a href="{% url 'admin-banner-list' %}">BANNER</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+        {{ legend|upper }}
+    </li>
+</ol>
+
+<div class="row">
+    <div class="col-sm-12">
+
+        <div class="card border-info shadow-lg pt-1 rounded">
+
+            <div class="card-header">
+                {{ legend|upper }}
+            </div>
+
+            <div class="card-body">
+
+                <div class="row g-3">
+
+                    <!-- FORM -->
+                    <div class="col-12 col-md-7">
+                        {% crispy form %}
+                    </div>
+
+                    <!-- IMAGE PREVIEW -->
+                    <div class="col-12 col-md-5 text-center">
+
+                        <div class="border rounded p-2">
+                            <img id="output"
+                                 src="#"
+                                 class="img-fluid rounded"
+                                 style="max-height:300px; display:none; object-fit:cover;">
+                        </div>
+
+                        <small class="text-muted d-block mt-2">
+                            Preview image will appear here
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+$(document).ready(function () {
+
+    // IMAGE PREVIEW (SAFE VERSION)
+    $('input[type="file"]').on('change', function (e) {
+
+        let file = e.target.files[0];
+
+        if (file) {
+            let reader = new FileReader();
+
+            reader.onload = function (event) {
+                $('#output')
+                    .attr('src', event.target.result)
+                    .show();
+            };
+
+            reader.readAsDataURL(file);
+        }
+    });
+
+});
+</script>
+
+{% endblock %}

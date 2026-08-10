@@ -1,0 +1,15 @@
+
+<div class="collapse navbar-collapse" id="navbarToggle">
+	<ul class="navbar-nav ml-auto">
+		<li class="nav-item"><a class="nav-link" href="{% url 'admin_home' %}">VARANDA <i class="fa fa-home"></i></a></li>
+		<li class="nav-item"><a class="nav-link" href="{% url 'admin-tender-list' %}">TENDER <i class="fa fa-list"></i></a></li>
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ request.user.username|upper }}</a>
+			<div class="dropdown-menu" aria-labelledby="dropdown02">
+				<a class="dropdown-item" href="{% url 'user-account' %}"><i class="fa fa-user"></i> Konta</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Sai</a>
+			</div>
+		</li>
+	</ul>
+</div>

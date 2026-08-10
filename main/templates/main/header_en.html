@@ -1,0 +1,58 @@
+{% load static %}
+<header id="header" class="d-flex align-items-center">
+    <div class="container d-flex align-items-center">
+        
+        <!-- <h1 class="logo me-auto"><a href="index.html">Green</a></h1> -->
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <a href="{% url 'home' l3 %}" class="logo me-auto">
+        <img data-src="{% static 'main/img/logo-mop.png' %}" alt="" class="img-fluid"></a>
+        
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a class="nav-link scrollto {{home_active}}" href="{% url 'home' l3 %}">Home</a></li>
+                <li class="dropdown"><a href="#" class="{{about_active}}"><span>About</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="{% url 'about' l3 %}">Profile of MOP</a></li>
+                        <li><a href="{% url 'orgchart' l3 %}">Org. Structure</a></li>
+                        <li><a href="{% url 'dg-list' l3 %}">General Director</a></li>
+                        <li><a href="{% url 'div-list' l3 %}">National Division</a></li>
+                        <li><a href="{% url 'otdiv-list' l3 %}">Related Institution</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown"><a href="#" class="{{doc_active}}"><span>Documents</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="{% url 'doc-list' l3 %}">Decree Law</a></li>
+                        <li><a href="{% url 'report-list' l3 %}">Reports</a></li>
+                    </ul>
+                </li>
+                
+                 
+                 <li class="dropdown"><a href="#" class="{{doc_active}}"><span>News</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                    {% for obj in newcat %}
+                        <li><a href="{% url 'news-cat-list' l3 obj.slug_name_en  %}">{{obj.name_en}}</a></li>
+                    {% endfor %}
+                    </ul>
+                </li>
+
+                <li><a class="nav-link scrollto {{proj_active}}" href="{% url 'proj-sum' l3 %}">Project</a></li>
+                <li class="dropdown"><a href="#" class="{{media_active}}"><span>Multimedia</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="{% url 'album' l3 %}">Images</a></li>
+                        <li><a href="{% url 'video' l3 %}">Video</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown"><a href="#" class="{{other_active}}"><span>Others</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="{% url 'vaga-list' l3 %}">Vacancy</a></li>
+                        <li><a href="{% url 'tender-list' l3 %}">Procurement</a></li>
+                        <li><a href="{% url 'ann-list' l3 %}">Other Announcement</a></li>
+                    </ul>
+                </li>
+                <li><a class="nav-link scrollto {{contact_active}}" href="{% url 'contact' l3 %}">Contact</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+        
+    </div>
+</header>

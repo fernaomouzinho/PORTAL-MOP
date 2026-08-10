@@ -1,0 +1,142 @@
+{% extends "web_admin/layout.html" %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-12">
+
+        <div class="card border-info shadow-lg rounded">
+
+            <div class="card-header">
+                <strong>{{ legend|upper }}</strong>
+            </div>
+
+            <div class="card-body">
+
+                <a class="btn btn-sm btn-info mb-2"
+                   href="{% url 'admin-video-add' %}">
+                    Aumenta <i class="fa fa-plus"></i>
+                </a>
+
+                <!-- RESPONSIVE TABLE -->
+                <div class="table-responsive">
+
+                    <table class="table table-sm table-striped align-middle">
+
+                        <thead>
+                            <tr>
+                                <th>Nu.</th>
+                                <th>Lingua</th>
+                                <th>Titulu</th>
+                                <th>Data</th>
+                                <th>Source</th>
+                                <th>URL</th>
+                                <th>#</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            {% for obj in objects %}
+
+                            <tr>
+                                <td>
+                                    {{ forloop.counter }}<br>
+
+                                    {% if obj.is_main %}
+                                        <i class="fa fa-star text-warning"></i>
+                                    {% endif %}
+
+                                    {% if obj.is_active %}
+                                        <i class="fa fa-check text-success"></i>
+                                    {% else %}
+                                        <i class="fa fa-ban text-danger"></i>
+                                    {% endif %}
+                                </td>
+
+                                <td>{{ obj.language }}</td>
+
+                                <td>
+                                    <strong>{{ obj.title }}</strong>
+                                    <div class="small text-muted">
+                                        {{ obj.date|date:"d/m/Y" }}
+                                    </div>
+                                </td>
+
+                                <td>{{ obj.date|date:"d/m/Y" }}</td>
+
+                                <td>{{ obj.source }}</td>
+
+                                <td style="max-width:180px; word-break:break-all;">
+                                    {{ obj.embed_url }}
+                                </td>
+
+                                <td>
+
+                                    <div class="d-flex flex-wrap gap-1">
+
+                                        <a class="btn btn-sm btn-info"
+                                           href="{% url 'admin-video-edit' obj.id %}">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+
+                                        <a class="btn btn-sm btn-danger"
+                                           href="{% url 'admin-video-rem' obj.id %}">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+
+                                        <a class="btn btn-sm btn-success"
+                                           href="{% url 'admin-video-main' obj.id %}">
+                                            <i class="fa fa-star"></i>
+                                        </a>
+
+                                        <a class="btn btn-sm btn-info"
+                                           href="{% url 'admin-video-play' obj.id %}">
+                                            <i class="fa fa-play"></i>
+                                        </a>
+
+                                        {% if obj.is_active %}
+                                        <a class="btn btn-sm btn-secondary"
+                                           href="{% url 'admin-video-dis' obj.id %}">
+                                            <i class="fa fa-ban"></i>
+                                        </a>
+                                        {% else %}
+                                        <a class="btn btn-sm btn-primary"
+                                           href="{% url 'admin-video-ena' obj.id %}">
+                                            <i class="fa fa-check"></i>
+                                        </a>
+                                        {% endif %}
+
+                                    </div>
+
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="7">
+                                    <strong>Deskrisaun:</strong>
+                                    <div class="text-muted">
+                                        {{ obj.desc|safe }}
+                                    </div>
+                                </td>
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

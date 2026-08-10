@@ -1,0 +1,97 @@
+{% extends "web_admin/layout.html" %}
+{% block content %}
+
+<div class="container-fluid">
+
+    <!-- TOP MENU -->
+    <div class="card shadow-sm border-0 mb-3">
+        <div class="card-header bg-white fw-bold">
+            {{ legend|upper }}
+        </div>
+
+        <div class="card-body">
+            <div class="row g-2">
+
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <a class="btn btn-primary w-100" href="{% url 'admin-portal-home' %}">
+                        Portal Home <i class="fa fa-home"></i>
+                    </a>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <a class="btn btn-primary w-100" href="{% url 'admin-proj-mopcat' %}">
+                        MOP-Kategoria <i class="fa fa-list"></i>
+                    </a>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <a class="btn btn-primary w-100" href="{% url 'admin-proj-cat' %}">
+                        Kategoria <i class="fa fa-list"></i>
+                    </a>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <a class="btn btn-primary w-100" href="{% url 'admin-proj-cap' %}">
+                        Capital <i class="fa fa-list"></i>
+                    </a>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <a class="btn btn-primary w-100" href="{% url 'admin-proj-sec' %}">
+                        Setor <i class="fa fa-list"></i>
+                    </a>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <a class="btn btn-warning w-100" href="{% url 'admin-proj-cont-list' %}">
+                        Kontratu Lao Hela <i class="fa fa-refresh"></i>
+                    </a>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <a class="btn btn-success w-100" href="{% url 'admin-proj-cont-hist' %}">
+                        Kontratu Kompletu <i class="fa fa-check"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- MAP SECTION -->
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-white fw-bold">
+            Mapa
+        </div>
+
+        <div class="card-body">
+            <div class="row g-2">
+
+                <div class="col-12 col-sm-6 col-md-4">
+                    <a class="btn btn-info w-100" href="{% url 'admin-map-g-list' %}">
+                        Mapa <i class="fa fa-map"></i>
+                    </a>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4">
+                    <a class="btn btn-info w-100" href="{% url 'admin-map-s-list' %}">
+                        Mapa Status <i class="fa fa-map"></i>
+                    </a>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4">
+                    <a class="btn btn-info w-100" href="{% url 'admin-map-p-list' %}">
+                        Mapa Progresu <i class="fa fa-map"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

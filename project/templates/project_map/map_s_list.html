@@ -1,0 +1,56 @@
+{% extends "web_admin/layout.html" %}
+{% block content %}
+    <ol class="breadcrumb mb-2 mt-1">
+        <li class="breadcrumb-item"><a href="{% url 'admin-proj-dash' %}">FILA</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ legend|upper }}</li>
+    </ol>
+	<div class="row">
+        <div class="col-sm-12">
+            <div class="card border-info shadow-lg pt-1 rounded">
+                <div class="card-header">{{ legend|upper }}</div>
+                <div class="card-body">
+                    <a class="btn btn-sm btn-info mb-1" href="{% url 'admin-map-s-add' %}">Aumenta <i class="fa fa-plus"></i></a>
+                    <table class="table table-sm table-striped" id="example">
+                        <thead>
+                            <tr>
+                                <th>Nu.</th>
+                                <th>Deskrisaun</th>
+                                <th>Upload Husi</th>
+                                <th>Data Upload</th>
+                                <th>Ativa</th>
+                                <th>#</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for obj in objects %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ obj.subject }}</td>
+                                <td>{{ obj.user|capfirst }}</td>
+                                <td>{{ obj.datetime|date:"d/m/Y" }}</td>
+                                <td>{% if obj.is_active == True %} Yes {% else %} No {% endif %} </td>
+                                <td>
+                                    <a class="btn btn-sm btn-secondary" href="{% url 'admin-map-s-view' obj.id %}" title="Hare Mapa"><i class="fa fa-map"></i></a>
+					                <a class="btn btn-sm btn-info" href="{% url 'admin-map-s-edit' obj.id %}" title="Altera"><i class="fa fa-edit"></i></a>
+					                <a class="btn btn-sm btn-primary" href="{% url 'admin-map-s-ena' obj.id %}" title="Ativa"><i class="fa fa-check"></i></a>
+					                <a class="btn btn-sm btn-danger" href="{% url 'admin-map-s-rem' obj.id %}" title="Hapaga"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div> <!--end card-body-->
+            </div> <!--end card-->
+        </div> <!--end col-->
+    </div> <!--end row-->
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#example').DataTable({
+      pageLength: 5,
+    });
+  });
+</script>
+
+{% endblock %}

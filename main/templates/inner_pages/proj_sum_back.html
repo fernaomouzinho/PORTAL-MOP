@@ -1,0 +1,135 @@
+{% extends "main/inner_page.html" %}
+{% load static %}
+{% block content %}
+<!-- ======= Breadcrumbs ======= -->
+<section id="breadcrumbs" class="breadcrumbs">
+	<div class="container">
+		<div class="d-flex justify-content-between align-items-center">
+			<h2>{{ legend }}</h2>
+			<ol>
+				<li>{{ legend }}</li>
+			</ol>
+		</div>
+	</div>
+</section><!-- End Breadcrumbs -->
+
+<!-- ======= Why Us Section ======= -->
+<section id="why-us" class="why-us mt-2">
+    <div class="container">
+        <div class="section-title">
+            <h2>{{ legend }}</h2>
+        </div>
+        <div class="row no-gutters">
+            
+            <div class="col-lg-12 col-md-6 content-item">
+                <center><h4>{{ lang_data.LINK_PSTATUS }}</h4></center>
+                <table class="table table-sm table-striped table-bordered">
+                    <tr align="center">
+                        <th>{{ lang_data.LINK_PNEW }} {{ data_status.year }}</th>
+                        <th>{{ lang_data.LINK_PROLL }}</th>
+                        <th>{{ lang_data.LINK_PCOMP }}</th>
+                        <th>{{ lang_data.LINK_PONGOING }}</th>
+                        <th>{{ lang_data.LINK_PNOTSTART }}</th>
+                    </tr>
+                    <tr align="center">
+                        <td>{{ data_status.new }}</td><td>{{ data_status.rollover }}</td>
+                        <td>{{ data_status.completed }}</td><td>{{ data_status.ongoing }}</td>
+                        <td>{{ data_status.notstarted }}</td>
+                    </tr>
+                </table>
+            </div><!--end col-->
+
+            <div class="col-lg-6 col-md-6 content-item">
+                <center><h4>{{ lang_data.LBL_PCAT }}</h4></center>
+                <table class="table table-sm table-striped table-bordered">
+                    <tr align="center">
+                        <th>FI</th><th>LM</th><th>EMERGENCIA</th>
+                    </tr>
+                    <tr align="center">
+                        <td width="30%">{{ data_cat.fi }}</td>
+                        <td width="30%">{{ data_cat.lm }}</td>
+                        <td width="30%">{{ data_cat.emer }}</td>
+                    </tr>
+                </table>
+            </div><!--end col-->
+
+            <div class="col-lg-6 col-md-6 content-item">
+                <center><h4>{{ lang_data.LBL_PCAP }}</h4></center>
+                <table class="table table-sm table-striped table-bordered">
+                    <tr align="center">
+                        <th>BS</th><th>CM</th><th>CD</th>
+                    </tr>
+                    <tr align="center">
+                        <td width="30%">{{ data_cap.bs }}</td>
+                        <td width="30%">{{ data_cap.cm }}</td>
+                        <td width="30%">{{ data_cap.cd }}</td>
+                    </tr>
+                </table>
+            </div><!--end col-->
+
+            <div class="col-lg-12 col-md-6 content-item">
+                <center><h4>{{ lang_data.LBL_PSEC }}</h4></center>
+                <table class="table table-sm table-striped table-bordered">
+                    <tr align="center">
+                        <th>Estrada</th><th>Ponte</th><th>Controlo Cheias</th>
+                        <th>Urbanizasaun</th><th>Estudu</th><th>Asset</th>
+                    </tr>
+                    <tr align="center">
+                        <td>{{ data_sec.estrada }}</td>
+                        <td>{{ data_sec.ponte }}</td>
+                        <td>{{ data_sec.cheias }}</td>
+                        <td>{{ data_sec.urban }}</td>
+                        <td>{{ data_sec.estudu }}</td>
+                        <td>{{ data_sec.asset }}</td>
+                    </tr>
+                </table>
+            </div><!--end col-->
+            
+        </div><!--end row-->
+        
+    </div>
+</section><!-- End Why Us Section -->
+
+<!-- ======= Featured Services Section ======= -->
+<section id="featured-services" class="featured-services section-bg">
+    <div class="container">
+        
+        <div class="row no-gutters">
+            <div class="col-lg-2 col-md-6">
+                <div class="icon-box">
+                    <center><div class="icon"><i class="bi bi-file-text"></i></div>
+                    <h4 class="title"><a href="{% url 'proj-list' lang %}">{{ lang_data.LINK_PLIST|upper }}</a></h4></center>
+                </div>
+            </div><!--end col-->
+            <div class="col-lg-2 col-md-6">
+                <div class="icon-box">
+                    <center><div class="icon"><i class="bi bi-file-text"></i></div>
+                    <h4 class="title"><a href="{% url 'proj-hist' lang %}">{{ lang_data.LINK_PHIST|upper }}</a></h4></center>
+                </div>
+            </div><!--end col-->
+            <div class="col-lg-2 col-md-6">
+                <div class="icon-box">
+                <center><div class="icon"><i class="bi bi-map"></i></div>
+                    <h4 class="title"><a href="{% url 'proj-map-g-view' lang %}">{{ lang_data.LINK_PMAPG|upper }}</a></h4></center>
+                </div>
+            </div><!--end col-->
+            <div class="col-lg-2 col-md-6">
+                <div class="icon-box">
+                <center><div class="icon"><i class="bi bi-map"></i></div>
+                    <h4 class="title"><a href="{% url 'proj-map-s-view' lang %}">{{ lang_data.LINK_PMAPS|upper }}</a></h4></center>
+                </div>
+            </div><!--end col-->
+            <div class="col-lg-2 col-md-6">
+                <div class="icon-box">
+                <center><div class="icon"><i class="bi bi-map"></i></div>
+                    <h4 class="title"><a href="{% url 'proj-map-p-view' lang %}">{{ lang_data.LINK_PMAPP|upper }}</a></h4></center>
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div>
+</section><!-- End Featured Services Section -->
+
+{% endblock %}
+{% block scripts %}
+
+{% endblock %}

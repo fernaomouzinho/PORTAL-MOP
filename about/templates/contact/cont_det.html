@@ -1,0 +1,94 @@
+{% extends "web_admin/layout.html" %}
+{% load humanize %}
+
+{% block content %}
+
+<div class="container-fluid py-3">
+
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb bg-light px-3 py-2 rounded-3 shadow-sm">
+            <li class="breadcrumb-item">
+                <a href="{% url 'admin-contactus' %}" class="text-decoration-none">
+                    MENSAJEN
+                </a>
+            </li>
+            <li class="breadcrumb-item active text-uppercase">
+                {{ legend }}
+            </li>
+        </ol>
+    </nav>
+
+    <!-- Main Card -->
+    <div class="row justify-content-center">
+
+        <div class="col-lg-9 col-md-10 col-sm-12">
+
+            <div class="card border-0 shadow-sm rounded-4">
+
+                <!-- Header -->
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0 text-uppercase">{{ legend }}</h5>
+                </div>
+
+                <!-- Body -->
+                <div class="card-body p-4">
+
+                    <!-- Info Grid -->
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+                            <div class="p-3 border rounded-3 bg-light h-100">
+                                <small class="text-muted">Naran</small>
+                                <div class="fw-semibold">{{ objects.name }}</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="p-3 border rounded-3 bg-light h-100">
+                                <small class="text-muted">Email</small>
+                                <div class="fw-semibold">{{ objects.email }}</div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="p-3 border rounded-3 bg-light">
+                                <small class="text-muted">Subject</small>
+                                <div class="fw-semibold">{{ objects.subject }}</div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="p-3 border rounded-3">
+                                <small class="text-muted">Message</small>
+                                <div class="mt-2" style="white-space: pre-line;">
+                                    {{ objects.message }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="p-3 border rounded-3 bg-light">
+                                <small class="text-muted">Sent</small>
+                                <div class="fw-semibold">
+                                    {{ objects.datetime|naturaltime }}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

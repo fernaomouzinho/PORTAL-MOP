@@ -1,0 +1,64 @@
+{% extends "web_admin/layout.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<ol class="breadcrumb mb-2 mt-1">
+    {% if page == "album" %}
+        <li class="breadcrumb-item">
+            <a href="{% url 'admin-album-list' %}">Album</a>
+        </li>
+    {% else %}
+        <li class="breadcrumb-item">
+            <a href="{% url 'admin-gallery-list' album.hashed %}">Galeria</a>
+        </li>
+    {% endif %}
+    <li class="breadcrumb-item active" aria-current="page">
+        {{ legend|upper }}
+    </li>
+</ol>
+
+<div class="row">
+    <div class="col-12">
+
+        <div class="card border-info shadow-lg rounded">
+
+            <div class="card-header">
+                <strong>{{ legend|upper }}</strong>
+            </div>
+
+            <div class="card-body">
+
+                <!-- responsive wrapper -->
+                <div class="container-fluid px-0">
+
+                    <div class="row justify-content-center">
+                        <div class="col-lg-12 col-md-12">
+
+                            <div class="table-responsive">
+                                {% crispy form %}
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+$("input[type=file]").on("change", function (e) {
+    const read = document.getElementById("output");
+    if (this.files && this.files[0]) {
+        read.src = URL.createObjectURL(this.files[0]);
+    }
+});
+</script>
+{% endblock %}

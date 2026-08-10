@@ -1,0 +1,148 @@
+{% extends "web_admin/layout.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+
+        <div class="card border-info shadow-lg pt-1 rounded">
+
+            <div class="card-header">
+                {{ legend|upper }}
+            </div>
+
+            <div class="card-body">
+
+                <a class="btn btn-sm btn-info mb-3" href="{% url 'admin-album-add' %}">
+                    Aumenta <i class="fa fa-plus"></i>
+                </a>
+
+                <!-- RESPONSIVE GRID -->
+                <div class="row g-3">
+
+                    {% for obj in page_obj %}
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+
+                        <div class="card h-100 shadow-sm border-0">
+
+                            <!-- IMAGE -->
+                            <a href="{% url 'admin-gallery-list' obj.hashed %}">
+                                <img src="{{ obj.image.url }}"
+                                     class="img-fluid"
+                                     style="width:100%; height:180px; object-fit:cover;">
+                            </a>
+
+                            <!-- TITLE -->
+                            <div class="card-body text-center p-2">
+
+                                <a href="{% url 'admin-gallery-list' obj.hashed %}"
+                                   class="text-decoration-none fw-semibold">
+                                    {{ obj.desc_tt }}
+                                </a>
+
+                                <div class="mt-1">
+                                    {% if obj.is_active %}
+                                        <i class="fa fa-check text-success"></i>
+                                    {% else %}
+                                        <i class="fa fa-ban text-danger"></i>
+                                    {% endif %}
+                                </div>
+
+                            </div>
+
+                            <!-- ACTIONS -->
+                            <div class="card-footer bg-white border-0 d-flex justify-content-center gap-1 flex-wrap">
+
+                                <a class="btn btn-sm btn-info"
+                                   href="{% url 'admin-album-edit' obj.hashed %}">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+
+                                <a class="btn btn-sm btn-danger"
+                                   href="{% url 'admin-album-rem' obj.pk %}">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+
+                                {% if obj.is_active %}
+                                    <a class="btn btn-sm btn-secondary"
+                                       href="{% url 'admin-album-dis' obj.id %}">
+                                        <i class="fa fa-ban"></i>
+                                    </a>
+                                {% else %}
+                                    <a class="btn btn-sm btn-primary"
+                                       href="{% url 'admin-album-ena' obj.id %}">
+                                        <i class="fa fa-check"></i>
+                                    </a>
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    {% endfor %}
+
+                </div>
+
+                <!-- PAGINATION -->
+                <hr/>
+
+                <div class="d-flex flex-wrap gap-1">
+
+                    {% if page_obj.has_previous %}
+                        <a class="btn btn-outline-secondary btn-sm"
+                           href="?page={{ page_obj.previous_page_number }}">
+                            <i class="fa fa-chevron-left"></i>
+                        </a>
+                    {% endif %}
+
+                    {% for num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == num %}
+                            <a class="btn btn-secondary btn-sm" href="?page={{ num }}">
+                                {{ num }}
+                            </a>
+                        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                            <a class="btn btn-outline-secondary btn-sm" href="?page={{ num }}">
+                                {{ num }}
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                        <a class="btn btn-outline-secondary btn-sm"
+                           href="?page={{ page_obj.next_page_number }}">
+                            <i class="fa fa-chevron-right"></i>
+                        </a>
+                    {% endif %}
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+<link rel="stylesheet" href="{% static 'main/css/gallery.css' %}">
+<script src="{% static 'main/js/gallery.js' %}"></script>
+
+<style>
+@media (max-width: 576px) {
+    .card img {
+        height: 160px !important;
+    }
+}
+</style>
+
+{% endblock %}
