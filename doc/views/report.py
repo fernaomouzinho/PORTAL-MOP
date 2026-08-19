@@ -2,7 +2,7 @@ import datetime
 from django.conf import settings
 from django.http import FileResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from users.decorators import allowed_users
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from doc.models import Report
 from doc.forms import ReportForm
@@ -10,7 +10,8 @@ from doc.utils import getnewid
 from users.decorators import allowed_users
 from portal.utils import get_roles
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def ReportList(request):
 	roles = get_roles(request)
 	objects = Report.objects.all().order_by('-id')
@@ -20,7 +21,8 @@ def ReportList(request):
 	}
 	return render(request, 'report/list.html', context)
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def ReportAdd(request):
 	roles = get_roles(request)
 	if request.method == 'POST':
@@ -42,7 +44,8 @@ def ReportAdd(request):
 	}
 	return render(request, 'report/form.html', context)
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def ReportEdit(request, hashid):
 	roles = get_roles(request)
 	objects = get_object_or_404(Report, hashed=hashid)
@@ -59,7 +62,7 @@ def ReportEdit(request, hashid):
 	}
 	return render(request, 'report/form.html', context)
 
-@allowed_users(allowed_roles=['portal_admin'])
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def ReportDetail(request, hashid):
 	roles = get_roles(request)
 	objects = get_object_or_404(Report, hashed=hashid)
@@ -69,7 +72,8 @@ def ReportDetail(request, hashid):
 	}
 	return render(request, 'report/detail.html', context)
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def ReportEnable(request, pk):
 	objects = get_object_or_404(Report, pk=pk)
 	objects.is_active = True
@@ -77,7 +81,8 @@ def ReportEnable(request, pk):
 	messages.success(request, f'Ativa ona.')
 	return redirect('admin-report-list')
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def ReportDisable(request, pk):
 	objects = get_object_or_404(Report, pk=pk)
 	objects.is_active = False
@@ -85,7 +90,8 @@ def ReportDisable(request, pk):
 	messages.success(request, f'Desativa ona.')
 	return redirect('admin-report-list')
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def ReportRem(request, pk):
 	objects = get_object_or_404(Report, pk=pk)
 	objects.delete()

@@ -11,7 +11,7 @@ from users.decorators import allowed_users
 from portal.utils import get_roles
 
 
-@allowed_users(allowed_roles=['portal_admin'])
+@allowed_users(allowed_roles=['sii_admin','portal_admin'])
 def AlbumList(request):
 	group = request.user.groups.all()[0].name
 	objects = []
@@ -25,7 +25,7 @@ def AlbumList(request):
 	}
 	return render(request, 'mul_gallery/album_list.html', context)
 
-@allowed_users(allowed_roles=['portal_admin'])
+@allowed_users(allowed_roles=['sii_admin','portal_admin'])
 def AlbumAdd(request):
 	group = request.user.groups.all()[0].name
 	if request.method == 'POST':
@@ -47,7 +47,7 @@ def AlbumAdd(request):
 	}
 	return render(request, 'mul_gallery/form.html', context)
 
-@allowed_users(allowed_roles=['portal_admin'])
+@allowed_users(allowed_roles=['sii_admin','portal_admin'])
 def AlbumUpdate(request, hashid):
 	group = request.user.groups.all()[0].name
 	album = get_object_or_404(Album, hashed=hashid)
@@ -64,14 +64,14 @@ def AlbumUpdate(request, hashid):
 	}
 	return render(request, 'mul_gallery/form.html', context)
 
-@allowed_users(allowed_roles=['portal_admin'])
+@allowed_users(allowed_roles=['sii_admin','portal_admin'])
 def AlbumRemove(request, pk):
 	objects = get_object_or_404(Album, pk=pk)
 	objects.delete()
 	messages.success(request, f'Hapaga ona.')
 	return redirect('admin-album-list')
 
-@allowed_users(allowed_roles=['portal_admin'])
+@allowed_users(allowed_roles=['sii_admin','portal_admin'])
 def AlbumEnable(request, pk):
 	objects = get_object_or_404(Album, pk=pk)
 	objects.is_active = True
@@ -79,7 +79,7 @@ def AlbumEnable(request, pk):
 	messages.success(request, f'Ativa')
 	return redirect('admin-album-list')
 
-@allowed_users(allowed_roles=['portal_admin'])
+@allowed_users(allowed_roles=['sii_admin','portal_admin'])
 def AlbumDisable(request, pk):
 	objects = get_object_or_404(Album, pk=pk)
 	objects.is_active = False
@@ -87,7 +87,7 @@ def AlbumDisable(request, pk):
 	messages.success(request, f'Desativa')
 	return redirect('admin-album-list')
 #gallery
-@allowed_users(allowed_roles=['portal_admin'])
+@allowed_users(allowed_roles=['sii_admin','portal_admin'])
 def GalleryList(request, hashid):
 	group = request.user.groups.all()[0].name
 	album = get_object_or_404(Album, hashed=hashid)
@@ -98,7 +98,7 @@ def GalleryList(request, hashid):
 	}
 	return render(request, 'mul_gallery/gallery_list.html', context)
 
-@allowed_users(allowed_roles=['portal_admin'])
+@allowed_users(allowed_roles=['sii_admin','portal_admin'])
 def GalleryAdd(request, hashid):
 	album = get_object_or_404(Album, hashed=hashid)
 	if request.method == 'POST':
@@ -121,7 +121,7 @@ def GalleryAdd(request, hashid):
 	}
 	return render(request, 'mul_gallery/form.html', context)
 
-@allowed_users(allowed_roles=['portal_admin'])
+@allowed_users(allowed_roles=['sii_admin','portal_admin'])
 def GalleryEdit(request, hashid, hashid2):
 	album = get_object_or_404(Album, hashed=hashid)
 	objects = get_object_or_404(Gallery, hashed=hashid2)
@@ -138,7 +138,7 @@ def GalleryEdit(request, hashid, hashid2):
 	}
 	return render(request, 'mul_gallery/form.html', context)
 
-@allowed_users(allowed_roles=['portal_admin'])
+@allowed_users(allowed_roles=['sii_admin','portal_admin'])
 def GalleryRemove(request, hashid, pk):
 	gallery = get_object_or_404(Gallery, pk=pk)
 	if request.method == 'GET':
@@ -146,7 +146,7 @@ def GalleryRemove(request, hashid, pk):
 		messages.success(request, f'Hapaga ona.')
 		return redirect('admin-gallery-list', hashid=hashid)
 
-@allowed_users(allowed_roles=['portal_admin'])
+@allowed_users(allowed_roles=['sii_admin','portal_admin'])
 def GalleryEnable(request, hashid, pk):
 	gallery = get_object_or_404(Gallery, pk=pk)
 	if request.method == 'GET':
@@ -155,7 +155,7 @@ def GalleryEnable(request, hashid, pk):
 		messages.success(request, f'Ativa ona.')
 		return redirect('admin-gallery-list', hashid=hashid)
 
-@allowed_users(allowed_roles=['portal_admin'])
+@allowed_users(allowed_roles=['sii_admin','portal_admin'])
 def GalleryDisable(request, hashid, pk):
 	gallery = get_object_or_404(Gallery, pk=pk)
 	if request.method == 'GET':

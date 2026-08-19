@@ -1,13 +1,14 @@
 from django.shortcuts import render
 from project.models import PortalHome, ProjCat, ProjCap, ProjMopCat, ProjSec
-from users.decorators import allowed_users
+from django.contrib.auth.decorators import login_required
 from project.read_api import read_portal_home, read_proj_cat, read_proj_cap, read_proj_mopcat, read_proj_sec,\
 	read_cont_list, read_cont_hist
 from users.decorators import allowed_users
 from portal.utils import get_roles
 
 
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def ProjDash(request):
 	roles = get_roles(request)
 	context = {
@@ -15,7 +16,8 @@ def ProjDash(request):
 	}
 	return render(request, 'project/dash.html', context)
 
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def PortalHomeList(request):
 	roles = get_roles(request)
 	read = read_portal_home()
@@ -26,7 +28,8 @@ def PortalHomeList(request):
 	}
 	return render(request, 'project/portal_home.html', context)
 
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def ProjMopCatList(request):
 	roles = get_roles(request)
 	read = read_proj_mopcat()
@@ -37,7 +40,8 @@ def ProjMopCatList(request):
 	}
 	return render(request, 'project/proj_mopcat.html', context)
 
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def ProjCatList(request):
 	roles = get_roles(request)
 	read = read_proj_cat()
@@ -48,7 +52,8 @@ def ProjCatList(request):
 	}
 	return render(request, 'project/proj_cat.html', context)
 
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def ProjCapList(request):
 	roles = get_roles(request)
 	read = read_proj_cap()
@@ -59,7 +64,8 @@ def ProjCapList(request):
 	}
 	return render(request, 'project/proj_cap.html', context)
 
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def ProjSecList(request):
 	roles = get_roles(request)
 	read = read_proj_sec()
@@ -70,7 +76,8 @@ def ProjSecList(request):
 	}
 	return render(request, 'project/proj_sec.html', context)
 # cont
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def ContList(request):
 	roles = get_roles(request)
 	read = read_cont_list()
@@ -83,7 +90,8 @@ def ContList(request):
 	}
 	return render(request, 'project/cont_list.html', context)
 
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def ContHist(request):
 	roles = get_roles(request)
 	read = read_cont_hist()

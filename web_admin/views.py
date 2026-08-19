@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from users.decorators import allowed_users
 from portal.utils import get_roles
 from django.db.models.functions import ExtractYear
@@ -9,7 +10,7 @@ from django.utils.timezone import now
 from django.db.models import Count, Sum, Q
 
 
-@allowed_users(allowed_roles=['portal_admin'])
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media','portal_dna'])
 def admin_home(request):
     roles = get_roles(request)
     current_year = now().year

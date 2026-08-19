@@ -15,7 +15,7 @@ from django.db.models import Q
 from django.core.paginator import Paginator
 
 
-@allowed_users(allowed_roles=['portal_admin','portal_media'])
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def NewsList(request):
     roles = get_roles(request)
     objects = News.objects.all().order_by('-is_headline','-is_main','-datetime')
@@ -26,7 +26,7 @@ def NewsList(request):
     return render(request, 'news/list.html', context)
 
 
-@allowed_users(allowed_roles=['portal_admin','portal_media'])
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def NewsAdd(request):
     if request.method == 'POST':
         newid, new_hashid = getnewid(News)
@@ -50,7 +50,8 @@ def NewsAdd(request):
     }
     return render(request, 'news/form.html', context)
 
-@allowed_users(allowed_roles=['portal_admin','portal_media'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def NewsEdit(request, hashid):
     objects = get_object_or_404(News, hashed=hashid)
     if request.method == 'POST':
@@ -70,7 +71,7 @@ def NewsEdit(request, hashid):
     return render(request, 'news/form.html', context)
 
 
-@allowed_users(allowed_roles=['portal_admin','portal_media'])
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def NewsDetail(request, hashid):
     roles = get_roles(request)
     news = get_object_or_404(News, hashed=hashid)
@@ -81,7 +82,8 @@ def NewsDetail(request, hashid):
     }
     return render(request, 'news/detail.html', context)
 
-@allowed_users(allowed_roles=['portal_admin','portal_media'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def NewsRem(request, pk):
     objects = get_object_or_404(News, pk=pk)
     if request.method == 'GET':
@@ -89,7 +91,8 @@ def NewsRem(request, pk):
         messages.success(request, f'Hapaga ona')
         return redirect('admin-news-list')
 
-@allowed_users(allowed_roles=['portal_admin','portal_media'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def NewsEnable(request, hashid):
     objects = get_object_or_404(News, hashed=hashid)
     if request.method == 'GET':
@@ -98,7 +101,8 @@ def NewsEnable(request, hashid):
         messages.success(request, f'Ativa ona')
         return redirect('admin-news-det', hashid=hashid)
 
-@allowed_users(allowed_roles=['portal_admin','portal_media'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def NewsDisable(request, hashid):
     objects = get_object_or_404(News, hashed=hashid)
     if request.method == 'GET':
@@ -107,7 +111,8 @@ def NewsDisable(request, hashid):
         messages.success(request, f'Desativa ona')
         return redirect('admin-news-det', hashid=hashid)
 
-@allowed_users(allowed_roles=['portal_admin','portal_media'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def NewsMainYes(request, pk):
     objects = get_object_or_404(News, pk=pk)
     objects.is_main = True
@@ -115,7 +120,8 @@ def NewsMainYes(request, pk):
     messages.success(request, f'Main yes')
     return redirect('admin-news-list')
 
-@allowed_users(allowed_roles=['portal_admin','portal_media'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def NewsMainNo(request, pk):
     objects = get_object_or_404(News, pk=pk)
     objects.is_main = False
@@ -123,7 +129,8 @@ def NewsMainNo(request, pk):
     messages.success(request, f'Main no')
     return redirect('admin-news-list')
 
-@allowed_users(allowed_roles=['portal_admin','portal_media'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def NewsHeadline(request, pk):
     objects = get_object_or_404(News, pk=pk)
     objects.is_headline = True
@@ -135,7 +142,8 @@ def NewsHeadline(request, pk):
     messages.success(request, f'Headline okay')
     return redirect('admin-news-list')
 ###
-@allowed_users(allowed_roles=['portal_admin','portal_media'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def NewsImageAdd(request, hashid):
     objects = get_object_or_404(News, hashed=hashid)
     if request.method == 'POST':
@@ -158,7 +166,8 @@ def NewsImageAdd(request, hashid):
     }
     return render(request, 'news/form_image.html', context)
 
-@allowed_users(allowed_roles=['portal_admin','portal_media'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def NewsImageEdit(request, hashid, pk):
     objects = get_object_or_404(NewsImage, pk=pk)
     if request.method == 'POST':

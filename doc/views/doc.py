@@ -3,7 +3,7 @@ import datetime
 from django.conf import settings
 from django.http import FileResponse, Http404
 from django.shortcuts import render, redirect, get_object_or_404
-from users.decorators import allowed_users
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
 from doc.models import Doc
@@ -12,7 +12,8 @@ from doc.utils import getnewid
 from users.decorators import allowed_users
 from portal.utils import get_roles
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def DocList(request):
 	roles = get_roles(request)
 	objects = Doc.objects.filter().all().order_by('-datetime')
@@ -22,7 +23,8 @@ def DocList(request):
 	}
 	return render(request, 'doc/list.html', context)
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def DocAdd(request):
 	if request.method == 'POST':
 		newid, new_hashid = getnewid(Doc)
@@ -43,7 +45,8 @@ def DocAdd(request):
 	}
 	return render(request, 'doc/form.html', context)
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def DocEdit(request, hashid):
 	objects = get_object_or_404(Doc, hashed=hashid)
 	if request.method == 'POST':
@@ -62,7 +65,8 @@ def DocEdit(request, hashid):
 	}
 	return render(request, 'doc/form.html', context)
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def DocDetail(request, hashid):
 	roles = get_roles(request)
 	doc = get_object_or_404(Doc, hashed=hashid)
@@ -72,7 +76,8 @@ def DocDetail(request, hashid):
 	}
 	return render(request, 'doc/detail.html', context)
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def DocEnable(request, pk):
 	objects = get_object_or_404(Doc, pk=pk)
 	objects.is_active = True
@@ -80,7 +85,8 @@ def DocEnable(request, pk):
 	messages.success(request, f'Ativa.')
 	return redirect('admin-doc-list')
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def DocDisable(request, pk):
 	objects = get_object_or_404(Doc, pk=pk)
 	objects.is_active = False
@@ -88,13 +94,16 @@ def DocDisable(request, pk):
 	messages.success(request, f'Desativa.')
 	return redirect('admin-doc-list')
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def DocRem(request, pk):
 	objects = get_object_or_404(Doc, pk=pk)
 	objects.delete()
 	messages.success(request, f'Hapaga ona.')
 	return redirect('admin-doc-list')
 
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def DocPDF(request, hashid):
 	doc = get_object_or_404(Doc, hashed=hashid)
 	context = {

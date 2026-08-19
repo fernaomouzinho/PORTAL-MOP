@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from custom.models import Year
+from django.contrib.auth.decorators import login_required
 from project.models import PortalHome, ProjMopCat, ProjCat, ProjCap, ProjSec
 from project.read_api import read_portal_home, read_proj_cat, read_proj_cap, read_proj_mopcat, read_proj_sec
 from users.decorators import allowed_users
 from portal.utils import get_roles
 
-
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+@login_required
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def PortalHomeSync(request):
 	roles = get_roles(request)
 	read = read_portal_home()
@@ -29,7 +30,8 @@ def PortalHomeSync(request):
 	messages.success(request, f'Atualiza ona.')
 	return redirect('admin-portal-home')
 
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+@login_required
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def PortalHomeEna(request):
 	obj = PortalHome.objects.first()
 	obj.is_active = True
@@ -37,15 +39,18 @@ def PortalHomeEna(request):
 	messages.success(request, f'Ativa ona.')
 	return redirect('admin-portal-home')
 
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+@login_required
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def PortalHomeDis(request):
 	obj = PortalHome.objects.first()
 	obj.is_active = False
 	obj.save()
 	messages.success(request, f'Desativa ona.')
 	return redirect('admin-portal-home')
+
 ### MOPCAT
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+@login_required
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def ProjMopCatSync(request):
 	roles = get_roles(request)
 	read = read_proj_mopcat()
@@ -65,7 +70,8 @@ def ProjMopCatSync(request):
 	messages.success(request, f'Atualiza ona.')
 	return redirect('admin-proj-mopcat')
 
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+@login_required
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def ProjMopCatEna(request):
 	obj = ProjMopCat.objects.first()
 	obj.is_active = True
@@ -73,7 +79,8 @@ def ProjMopCatEna(request):
 	messages.success(request, f'Ativa ona.')
 	return redirect('admin-proj-mopcat')
 
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+@login_required
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def ProjMopCatDis(request):
 	obj = ProjMopCat.objects.first()
 	obj.is_active = False
@@ -81,7 +88,8 @@ def ProjMopCatDis(request):
 	messages.success(request, f'Desativa ona.')
 	return redirect('admin-proj-mopcat')
 ### CAT
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+@login_required
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def ProjCatSync(request):
 	groles = get_roles(request)
 	read = read_proj_cat()
@@ -98,7 +106,8 @@ def ProjCatSync(request):
 	messages.success(request, f'Atualiza ona.')
 	return redirect('admin-proj-cat')
 
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+@login_required
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def ProjCatEna(request):
 	obj = ProjCat.objects.first()
 	obj.is_active = True
@@ -106,15 +115,18 @@ def ProjCatEna(request):
 	messages.success(request, f'Ativa ona.')
 	return redirect('admin-proj-cat')
 
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+@login_required
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def ProjCatDis(request):
 	obj = ProjCat.objects.first()
 	obj.is_active = False
 	obj.save()
 	messages.success(request, f'Desativa ona.')
 	return redirect('admin-proj-cat')
+
 ### CAP
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+@login_required
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def ProjCapSync(request):
 	roles = get_roles(request)
 	read = read_proj_cap()
@@ -131,7 +143,8 @@ def ProjCapSync(request):
 	messages.success(request, f'Atualiza ona.')
 	return redirect('admin-proj-cap')
 
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+@login_required
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def ProjCapEna(request):
 	obj = ProjCap.objects.first()
 	obj.is_active = True
@@ -139,15 +152,18 @@ def ProjCapEna(request):
 	messages.success(request, f'Ativa ona.')
 	return redirect('admin-proj-cap')
 
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+@login_required
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def ProjCapDis(request):
 	obj = ProjCap.objects.first()
 	obj.is_active = False
 	obj.save()
 	messages.success(request, f'Desativa ona.')
 	return redirect('admin-proj-cap')
+
 ### SEC
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+@login_required
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def ProjSecSync(request):
 	roles = get_roles(request)
 	read = read_proj_sec()
@@ -168,7 +184,8 @@ def ProjSecSync(request):
 	messages.success(request, f'Atualiza ona.')
 	return redirect('admin-proj-sec')
 
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+@login_required
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def ProjSecEna(request):
 	obj = ProjSec.objects.first()
 	obj.is_active = True
@@ -176,7 +193,8 @@ def ProjSecEna(request):
 	messages.success(request, f'Ativa ona.')
 	return redirect('admin-proj-sec')
 
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+@login_required
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def ProjSecDis(request):
 	obj = ProjSec.objects.first()
 	obj.is_active = False

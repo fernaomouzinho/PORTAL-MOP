@@ -13,7 +13,8 @@ from .utils import getnewid
 from users.decorators import allowed_users
 from portal.utils import get_roles
 
-@allowed_users(allowed_roles=['portal_admin','portal_media'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def AnnounceList(request):
 	roles = get_roles(request)
 	if roles == "portal_admin":
@@ -26,7 +27,8 @@ def AnnounceList(request):
 	}
 	return render(request, 'announce/list.html', context)
 
-@allowed_users(allowed_roles=['portal_admin','portal_media'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def AnnounceAdd(request):
 	if request.method == 'POST':
 		newid, new_hashid = getnewid(Announce)
@@ -47,7 +49,8 @@ def AnnounceAdd(request):
 	}
 	return render(request, 'announce/form.html', context)
 
-@allowed_users(allowed_roles=['portal_admin','portal_media'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def AnnounceEdit(request, hashid):
 	objects = get_object_or_404(Announce, hashed=hashid)
 	if request.method == 'POST':
@@ -66,7 +69,8 @@ def AnnounceEdit(request, hashid):
 	}
 	return render(request, 'announce/form.html', context)
 
-@allowed_users(allowed_roles=['portal_admin','portal_media'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def AnnounceDetail(request, hashid):
 	group = request.user.groups.all()[0].name
 	objects = get_object_or_404(Announce, hashed=hashid)
@@ -76,7 +80,8 @@ def AnnounceDetail(request, hashid):
 	}
 	return render(request, 'announce/detail.html', context)
 
-@allowed_users(allowed_roles=['portal_admin','portal_media'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def AnnounceEnable(request, pk):
 	objects = get_object_or_404(Announce, pk=pk)
 	if request.method == 'GET':
@@ -85,7 +90,8 @@ def AnnounceEnable(request, pk):
 		messages.success(request, f'Ativa.')
 		return redirect('admin-ann-list')
 
-@allowed_users(allowed_roles=['portal_admin','portal_media'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def AnnounceDisable(request, pk):
 	objects = get_object_or_404(Announce, pk=pk)
 	if request.method == 'GET':
@@ -94,7 +100,8 @@ def AnnounceDisable(request, pk):
 		messages.success(request, f'Desativa.')
 		return redirect('admin-ann-list')
 
-@allowed_users(allowed_roles=['portal_admin','portal_media'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def AnnounceRem(request, pk):
 	objects = get_object_or_404(Announce, pk=pk)
 	objects.delete()

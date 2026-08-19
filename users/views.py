@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from users.decorators import allowed_users
 from users.forms import UserUpdateForm
 
-@login_required
+
 def AccountUpdate(request):
 	if request.method == 'POST':
 		u_form = UserUpdateForm(request.POST, instance=request.user)

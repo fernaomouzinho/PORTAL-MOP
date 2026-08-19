@@ -1,13 +1,15 @@
 import datetime
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from project.models import ProjMapG, ProjMapS, ProjMapP
 from project.forms import ProjMapGForm, ProjMapSForm, ProjMapPForm
 from project.utils import getnewid
 from users.decorators import allowed_users
 from portal.utils import get_roles
 
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def ProjMapGAdd(request):
 	roles = get_roles(request)
 	if request.method == 'POST':
@@ -28,7 +30,8 @@ def ProjMapGAdd(request):
 	}
 	return render(request, 'project_map/form.html', context)
 
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def ProjMapGEdit(request, pk):
 	roles = get_roles(request)
 	obj = get_object_or_404(ProjMapG, pk=pk)
@@ -48,14 +51,16 @@ def ProjMapGEdit(request, pk):
 	}
 	return render(request, 'project_map/form.html', context)
 
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def ProjMapGRem(request, pk):
 	obj = get_object_or_404(ProjMapG, pk=pk)
 	obj.delete()
 	messages.success(request, f'Hapaga ona.')
 	return redirect('admin-map-g-list')
 
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def ProjMapGEna(request, pk):
 	obj = get_object_or_404(ProjMapG, pk=pk)
 	obj.is_active = True
@@ -67,7 +72,8 @@ def ProjMapGEna(request, pk):
 	messages.success(request, f'Ativa ona.')
 	return redirect('admin-map-g-list')
 #
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def ProjMapSAdd(request):
 	roles = get_roles(request)
 	if request.method == 'POST':
@@ -88,9 +94,10 @@ def ProjMapSAdd(request):
 	}
 	return render(request, 'project_map/form.html', context)
 
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def ProjMapSEdit(request, pk):
-	groles = get_roles(request)
+	roles = get_roles(request)
 	obj = get_object_or_404(ProjMapS, pk=pk)
 	if request.method == 'POST':
 		form = ProjMapSForm(request.POST, request.FILES, instance=obj)
@@ -108,14 +115,16 @@ def ProjMapSEdit(request, pk):
 	}
 	return render(request, 'project_map/form.html', context)
 
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def ProjMapSRem(request, pk):
 	obj = get_object_or_404(ProjMapG, pk=pk)
 	obj.delete()
 	messages.success(request, f'Hapaga ona.')
 	return redirect('admin-map-s-list')
 
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def ProjMapSEna(request, pk):
 	obj = get_object_or_404(ProjMapS, pk=pk)
 	obj.is_active = True
@@ -128,7 +137,8 @@ def ProjMapSEna(request, pk):
 	return redirect('admin-map-s-list')
 
 #
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def ProjMapPAdd(request):
 	roles = get_roles(request)
 	if request.method == 'POST':
@@ -149,7 +159,8 @@ def ProjMapPAdd(request):
 	}
 	return render(request, 'project_map/form.html', context)
 
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def ProjMapPEdit(request, pk):
 	roles = get_roles(request)
 	obj = get_object_or_404(ProjMapP, pk=pk)
@@ -169,14 +180,16 @@ def ProjMapPEdit(request, pk):
 	}
 	return render(request, 'project_map/form.html', context)
 
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def ProjMapPRem(request, pk):
 	obj = get_object_or_404(ProjMapP, pk=pk)
 	obj.delete()
 	messages.success(request, f'Hapaga ona.')
 	return redirect('admin-map-p-list')
 
-@allowed_users(allowed_roles=['portal_admin','portal_dna'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def ProjMapPEna(request, pk):
 	obj = get_object_or_404(ProjMapP, pk=pk)
 	obj.is_active = True

@@ -10,7 +10,8 @@ from users.decorators import allowed_users
 from portal.utils import get_roles
 
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def AboutView(request):
 	roles = get_roles(request)
 	objects = About.objects.first()
@@ -20,7 +21,8 @@ def AboutView(request):
   	}
 	return render(request, 'about/about.html', context)
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def AboutEdit(request):
 	objects = About.objects.first()
 	if request.method == 'POST':
@@ -36,7 +38,8 @@ def AboutEdit(request):
 	}
 	return render(request, 'about/form.html', context)
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def OrgChartEdit(request):
 	objects = About.objects.first()
 	if request.method == 'POST':
@@ -60,7 +63,8 @@ def OrgChartPDF(request):
 	}
 	return render(request, 'about/pdf.html', context)
 #
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def ContView(request):
 	objects = Contact.objects.first()
 	if request.method == 'POST':
@@ -76,7 +80,8 @@ def ContView(request):
 	}
 	return render(request, 'contact/cont.html', context)
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def ContMunList(request):
 	objects = ContactMun.objects.all()
 	context = {
@@ -85,7 +90,8 @@ def ContMunList(request):
 	}
 	return render(request, 'contact/cont_mun.html', context)
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def ContMunAdd(request):
 	if request.method == 'POST':
 		newid, new_hashid = getnewid(ContactMun)
@@ -104,7 +110,8 @@ def ContMunAdd(request):
 	}
 	return render(request, 'contact/form.html', context)
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def ContMunEdit(request, pk):
 	objects =get_object_or_404(ContactMun, pk=pk)
 	if request.method == 'POST':

@@ -1,14 +1,15 @@
 import datetime
 from django.shortcuts import render, redirect, get_object_or_404
-from users.decorators import allowed_users
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from about.models import Structure
 from about.forms import StructureForm
 from about.utils import getnewid
 from users.decorators import allowed_users
 from portal.utils import get_roles
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def StrucList(request):
 	roles = get_roles(request)
 	objects = Structure.objects.all()
@@ -18,7 +19,8 @@ def StrucList(request):
 	}
 	return render(request, 'struc/list.html', context)
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def StrucDetail(request, pk):
 	roles = get_roles(request)
 	struc = get_object_or_404(Structure, pk=pk)
@@ -29,7 +31,8 @@ def StrucDetail(request, pk):
 	}
 	return render(request, 'struc/detail.html', context)
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def StrucImg(request):
 	roles = get_roles(request)
 	objects1 = Structure.objects.filter(order=1).all()
@@ -42,7 +45,8 @@ def StrucImg(request):
 	}
 	return render(request, 'struc/img.html', context)
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def StrucAdd(request):
 	if request.method == 'POST':
 		newid, new_hashid = getnewid(Structure)
@@ -63,7 +67,8 @@ def StrucAdd(request):
 	}
 	return render(request, 'struc/form.html', context)
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def StrucEdit(request, pk):
 	objects = get_object_or_404(Structure, pk=pk)
 	if request.method == 'POST':
@@ -79,7 +84,8 @@ def StrucEdit(request, pk):
 	}
 	return render(request, 'struc/form.html', context)
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def StrucEna(request, pk):
 	objects = get_object_or_404(Structure, pk=pk)
 	objects.is_active = True
@@ -87,7 +93,8 @@ def StrucEna(request, pk):
 	messages.success(request, f'Ativa ona.')
 	return redirect('admin-struc-list')
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_media'])
 def StrucDis(request, pk):
 	objects = get_object_or_404(Structure, pk=pk)
 	objects.is_active = False

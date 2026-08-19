@@ -8,7 +8,7 @@ from users.decorators import allowed_users
 from portal.utils import get_roles
 
 
-@allowed_users(allowed_roles=['portal_admin'])
+@allowed_users(allowed_roles=['sii_admin','portal_admin'])
 def VideoList(request):
 	objects = Video.objects.all().order_by('-date','id')
 	context = {
@@ -17,7 +17,7 @@ def VideoList(request):
 	}
 	return render(request, 'mul_video/list.html', context)
 
-@allowed_users(allowed_roles=['portal_admin'])
+@allowed_users(allowed_roles=['sii_admin','portal_admin'])
 def VideoAdd(request):
 	if request.method == 'POST':
 		newid, new_hashid = getnewid(Video)
@@ -38,7 +38,7 @@ def VideoAdd(request):
 	}
 	return render(request, 'mul_video/form.html', context)
 
-@allowed_users(allowed_roles=['portal_admin'])
+@allowed_users(allowed_roles=['sii_admin','portal_admin'])
 def VideoEdit(request, pk):
 	objects = get_object_or_404(Video, pk=pk)
 	if request.method == 'POST':
@@ -54,14 +54,14 @@ def VideoEdit(request, pk):
 	}
 	return render(request, 'mul_video/form.html', context)
 
-@allowed_users(allowed_roles=['portal_admin'])
+@allowed_users(allowed_roles=['sii_admin','portal_admin'])
 def VideoRemove(request, pk):
 	objects = get_object_or_404(Video, pk=pk)
 	objects.delete()
 	messages.success(request, f'Hapaga ona.')
 	return redirect('admin-video-list')
 
-@allowed_users(allowed_roles=['portal_admin'])
+@allowed_users(allowed_roles=['sii_admin','portal_admin'])
 def VideoEnable(request, pk):
 	objects = get_object_or_404(Video, pk=pk)
 	objects.is_active = True
@@ -69,7 +69,7 @@ def VideoEnable(request, pk):
 	messages.success(request, f'Ativa ona.')
 	return redirect('admin-video-list')
 
-@allowed_users(allowed_roles=['portal_admin'])
+@allowed_users(allowed_roles=['sii_admin','portal_admin'])
 def VideoDisable(request, pk):
 	objects = get_object_or_404(Video, pk=pk)
 	objects.is_active = False
@@ -77,7 +77,7 @@ def VideoDisable(request, pk):
 	messages.success(request, f'Desativa ona.')
 	return redirect('admin-video-list')
 
-@allowed_users(allowed_roles=['portal_admin'])
+@allowed_users(allowed_roles=['sii_admin','portal_admin'])
 def VideoMain(request, pk):
 	objects = get_object_or_404(Video, pk=pk)
 	objects2 = Video.objects.exclude(pk=pk).all()
@@ -89,7 +89,7 @@ def VideoMain(request, pk):
 	messages.success(request, f'Main okay.')
 	return redirect('admin-video-list')
 
-@allowed_users(allowed_roles=['portal_admin'])
+@allowed_users(allowed_roles=['sii_admin','portal_admin'])
 def VideoPlay(request, pk):
 	objects = get_object_or_404(Video, pk=pk)
 	context = {

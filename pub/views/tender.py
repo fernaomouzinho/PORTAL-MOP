@@ -3,7 +3,7 @@ import datetime
 from django.conf import settings
 from django.http import FileResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from users.decorators import allowed_users
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from pub.models import Tender
 from pub.forms import TenderForm
@@ -11,7 +11,8 @@ from pub.utils import getnewid
 from users.decorators import allowed_users
 from portal.utils import get_roles
 
-@allowed_users(allowed_roles=['portal_admin', 'portal_dna'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def TenderList(request):
 	roles = get_roles(request)
 	objects = Tender.objects.all().order_by('-id')
@@ -21,7 +22,8 @@ def TenderList(request):
 	}
 	return render(request, 'tender/list.html', context)
 
-@allowed_users(allowed_roles=['portal_admin', 'portal_dna'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def TenderAdd(request):
 	roles = get_roles(request)
 	if request.method == 'POST':
@@ -43,7 +45,8 @@ def TenderAdd(request):
 	}
 	return render(request, 'tender/form.html', context)
 
-@allowed_users(allowed_roles=['portal_admin', 'portal_dna'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def TenderEdit(request, hashid):
 	roles = get_roles(request)
 	objects = get_object_or_404(Tender, hashed=hashid)
@@ -60,7 +63,7 @@ def TenderEdit(request, hashid):
 	}
 	return render(request, 'tender/form.html', context)
 
-@allowed_users(allowed_roles=['portal_admin', 'portal_dna'])
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def TenderDetail(request, hashid):
 	group = request.user.groups.all()[0].name
 	objects = get_object_or_404(Tender, hashed=hashid)
@@ -70,7 +73,8 @@ def TenderDetail(request, hashid):
 	}
 	return render(request, 'tender/detail.html', context)
 
-@allowed_users(allowed_roles=['portal_admin', 'portal_dna'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def TenderEnable(request, pk):
 	objects = get_object_or_404(Tender, pk=pk)
 	objects.is_active = True
@@ -78,7 +82,8 @@ def TenderEnable(request, pk):
 	messages.success(request, f'Ativa ona.')
 	return redirect('admin-tender-list')
 
-@allowed_users(allowed_roles=['portal_admin', 'portal_dna'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def TenderDisable(request, hashid):
 	objects = get_object_or_404(Tender, hashed=hashid)
 	objects.is_active = False
@@ -86,7 +91,8 @@ def TenderDisable(request, hashid):
 	messages.success(request, f'Desativa ona.')
 	return redirect('admin-tender-list')
 
-@allowed_users(allowed_roles=['portal_admin', 'portal_dna'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_dna'])
 def TenderRem(request, pk):
 	objects = get_object_or_404(Tender, pk=pk)
 	objects.delete()

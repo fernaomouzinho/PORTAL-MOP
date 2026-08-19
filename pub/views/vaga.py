@@ -4,6 +4,7 @@ from django.conf import settings
 from django.http import FileResponse, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from pub.models import Vaga
 from pub.forms import VagaForm
@@ -11,7 +12,8 @@ from pub.utils import getnewid
 from users.decorators import allowed_users
 from portal.utils import get_roles
 
-@allowed_users(allowed_roles=['portal_admin', 'portal_hrms'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_hr'])
 def VagaList(request):
     roles = get_roles(request)
     objects = Vaga.objects.all().order_by('-id')
@@ -21,7 +23,8 @@ def VagaList(request):
     }
     return render(request, 'vaga/list.html', context)
 
-@allowed_users(allowed_roles=['portal_admin', 'portal_hr'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_hr'])
 def VagaAdd(request):
     roles = get_roles(request)
     if request.method == 'POST':
@@ -43,7 +46,8 @@ def VagaAdd(request):
     }
     return render(request, 'vaga/form.html', context)
 
-@allowed_users(allowed_roles=['portal_admin', 'portal_hr'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_hr'])
 def VagaEdit(request, hashid):
     roles = get_roles(request)
     objects = get_object_or_404(Vaga, hashed=hashid)
@@ -60,7 +64,8 @@ def VagaEdit(request, hashid):
     }
     return render(request, 'vaga/form.html', context)
 
-@allowed_users(allowed_roles=['portal_admin', 'portal_hr'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_hr'])
 def VagaDetail(request, hashid):
     roles = get_roles(request)
     objects = get_object_or_404(Vaga, hashed=hashid)
@@ -70,7 +75,8 @@ def VagaDetail(request, hashid):
     }
     return render(request, 'vaga/detail.html', context)
 
-@allowed_users(allowed_roles=['portal_admin', 'portal_hr'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_hr'])
 def VagaEnable(request, pk):
     objects = get_object_or_404(Vaga, pk=pk)
     objects.is_active = True
@@ -78,7 +84,8 @@ def VagaEnable(request, pk):
     messages.success(request, f'Ativa ona.')
     return redirect('admin-vaga-list')
 
-@allowed_users(allowed_roles=['portal_admin', 'portal_hr'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_hr'])
 def VagaDisable(request, pk):
     objects = get_object_or_404(Vaga, pk=pk)
     objects.is_active = False
@@ -86,7 +93,8 @@ def VagaDisable(request, pk):
     messages.success(request, f'Desativa ona.')
     return redirect('admin-vaga-list')
 
-@allowed_users(allowed_roles=['portal_admin', 'portal_hr'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin','portal_hr'])
 def VagaRem(request, pk):
     objects = get_object_or_404(Vaga, pk=pk)
     objects.delete()

@@ -3,7 +3,7 @@ import datetime
 from django.conf import settings
 from django.http import FileResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from users.decorators import allowed_users
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from pub.models import Publication
 from pub.forms import PublicationForm
@@ -11,7 +11,8 @@ from pub.utils import getnewid
 from users.decorators import allowed_users
 from portal.utils import get_roles
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin'])
 def PubList(request):
 	roles = get_roles(request)
 	objects = Publication.objects.all().order_by('-id')
@@ -21,7 +22,8 @@ def PubList(request):
 	}
 	return render(request, 'pub/list.html', context)
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin'])
 def PubAdd(request):
 	roles = get_roles(request)
 	if request.method == 'POST':
@@ -43,7 +45,8 @@ def PubAdd(request):
 	}
 	return render(request, 'pub/form.html', context)
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin'])
 def PubEdit(request, hashid):
 	roles = get_roles(request)
 	objects = get_object_or_404(Publication, hashed=hashid)
@@ -60,7 +63,8 @@ def PubEdit(request, hashid):
 	}
 	return render(request, 'pub/form.html', context)
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin'])
 def PubDetail(request, hashid):
 	roles = get_roles(request)
 	objects = get_object_or_404(Publication, hashed=hashid)
@@ -70,7 +74,8 @@ def PubDetail(request, hashid):
 	}
 	return render(request, 'pub/detail.html', context)
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin'])
 def PubEnable(request, pk):
 	objects = get_object_or_404(Publication, pk=pk)
 	objects.is_active = True
@@ -78,7 +83,8 @@ def PubEnable(request, pk):
 	messages.success(request, f'Ativa ona.')
 	return redirect('admin-pub-list')
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin'])
 def PubDisable(request, hashid):
 	objects = get_object_or_404(Publication, hashed=hashid)
 	objects.is_active = False
@@ -86,7 +92,8 @@ def PubDisable(request, hashid):
 	messages.success(request, f'Desativa ona.')
 	return redirect('admin-pub-list')
 
-@allowed_users(allowed_roles=['portal_admin'])
+
+@allowed_users(allowed_roles=['sii_admin','portal_admin'])
 def PubRem(request, pk):
 	objects = get_object_or_404(Publication, pk=pk)
 	objects.delete()
